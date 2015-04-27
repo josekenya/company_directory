@@ -66,6 +66,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url();?>assets/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/index.js"></script>
   </body>
 </html>

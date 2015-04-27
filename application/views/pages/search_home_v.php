@@ -1,5 +1,6 @@
  <!--searchbar-->
       <div class="jumbotron">
+        <div id="infoMessage"></div>
         <h1>Company Logo</h1>
       </div>
 <!--end searchbar-->
@@ -87,35 +88,38 @@
               <h4 class="modal-title" id="myModalLabel">Login</h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" role="form">
+              <form class="form-horizontal" id="login_form" role="form">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+                            <label for="identity" class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-6">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" required="">
+                                <input type="email" class="form-control" name="identity" id="identity" placeholder="Email" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
+                            <label for="password" class="col-sm-3 control-label">Password</label>
                             <div class="col-sm-6">
-                                <input type="password" class="form-control" id="inputPassword3" placeholder="Password" required="">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <div class="checkbox">
                                     <label class="">
-                                        <input type="checkbox" class="">Remember me</label>
+                                        <input type="checkbox" name="remember" class="">Remember me</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group last">
                             <div class="col-sm-offset-3 col-sm-6">
-                                <button type="submit" class="btn btn-success btn-sm">Sign in</button>
+                                <button type="submit" id="login_btn" class="btn btn-success btn-sm">Login</button>
                                 <button type="reset" class="btn btn-default btn-sm">Reset</button>
                             </div>
                         </div>
                 </form>
                 <p><a href="#">Forgot password?</a></p>
+                <div class="show-progress hide">Please Wait....</div>    
+                <div class="show-error alert alert-danger hide"></div>
+                <div class="show-success alert alert-success hide"></div>
             </div>
             <div class="modal-footer">
             </div>
@@ -132,35 +136,42 @@
             </div>
             <div class="modal-body">
                 
-                <form class="form-horizontal" role="form">
+                <form id="create_user_form"class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label for="firstname" class="col-sm-3 control-label">First Name</label>
+                            <label for="first-name" class="col-sm-3 control-label">First Name</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" name="first-name" id="first-name" placeholder="Email" required="">
+                                <input type="text" class="form-control" name="first-name" id="first-name" placeholder="First Name" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="lastname" class="col-sm-3 control-label">Last Name</label>
+                            <label for="last-name" class="col-sm-3 control-label">Last Name</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Password" required="">
+                                <input type="text" class="form-control" name="last-name" id="last-name" placeholder="Last Name" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email" class="col-sm-3 control-label">Email</label>
                             <div class="col-sm-6">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Password" required="">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="username" class="col-sm-3 control-label">Username</label>
+                            <label for="phone" class="col-sm-3 control-label">Phone Number</label>
                             <div class="col-sm-6">
-                                <input type="password" class="form-control" name="username" id="username" placeholder="Password" required="">
+                                <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone Number" required>
                             </div>
                         </div>
+                
                         <div class="form-group">
                             <label for="password" class="col-sm-3 control-label">Password</label>
                             <div class="col-sm-6">
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-confirm" class="col-sm-3 control-label">Confirm Password</label>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" name="password-confirm" id="password-confirm" placeholder="Confirm Password" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -173,12 +184,14 @@
                         </div>
                         <div class="form-group last">
                             <div class="col-sm-offset-3 col-sm-6">
-                                <button type="submit" class="btn btn-success btn-sm">Sign in</button>
+                                <button type="submit" id="submit_user" class="btn btn-success btn-sm">Sign Up</button>
                                 <button type="reset" class="btn btn-default btn-sm">Reset</button>
                             </div>
                         </div>
                 </form>
-
+            <div class="show-progress hide">Please Wait....</div>    
+            <div class="show-error alert alert-danger hide"></div>
+            <div class="show-success alert alert-success hide"></div>
             </div>
             <div class="modal-footer">
               
