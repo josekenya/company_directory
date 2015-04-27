@@ -52,6 +52,7 @@ beforeSend: function(){ $(".show-progress").removeClass('hide');},
 complete: function(){ $(".show-progress").addClass('hide');}
 });
 sentData.done(function(result){
+var response=JSON.parse(result);
   if(response.errors)
 	{
 	  $(".show-error").html(response.errors).removeClass('hide').delay(2000).fadeOut();

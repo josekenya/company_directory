@@ -33,7 +33,7 @@ class Me extends CI_Controller
 			//redirect them to the login page
 			 $id=$this->session->userdata('user_id');
 			$this->data['users']=$this->ion_auth->user($id)->row();
-			$this->data['page_title']='Admin Profile';
+			$this->data['page_title']='My Profile';
 		    $this->template->load('admin_default','pages/admin_profile_v', $this->data);
 		}
 	}
