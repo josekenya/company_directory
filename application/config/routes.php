@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] = "search";
+$route['company/(:num)']="company";
 $route['404_override'] = '';
 
 

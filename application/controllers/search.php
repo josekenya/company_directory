@@ -35,7 +35,10 @@ class Search extends CI_Controller
 			{
 				//if the login is successful
 				//redirect them back to the admin page
-				redirect('me', 'refresh');
+				//redirect('me', 'refresh');
+				$data['success']="1";
+				echo json_encode($data);
+				
 			}
 			else
 			{

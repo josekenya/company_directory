@@ -16,9 +16,32 @@ class Me extends CI_Controller
 		else
 		{
 			//redirect them to the login page
-			$data=array('page_title'=>'Admin');
-		    $this->template->load('admin_default','pages/dashboard', $data);
+			$id=$this->session->userdata('user_id');
+			$data['company_count']=$this->company_m->company_count($id);
+			$data['co']=$this->company_m->get_companies($id);
+			$data['page_title']='Admin';
+		    $this->template->load('admin_default','pages/dashboard_v', $data);
 		}
+	}
+	function add_company()
+	{
+		 $this->form_validation->set_rules('company-name','Company Name','required');
+		 if($this->form_validation->run()==false)
+		 {
+	       $data['errors']=validation_errors();
+	       echo json_encode($data);
+		 }	
+		 else
+		 {
+		  $this->company_m->add_company();
+		  $data['success']="Company Created!";
+		  echo json_encode($data);
+		 }
+	}
+	function delete_company()
+	{
+	  $id=$this->input->post('id');	
+      $this->company_m->delete_company($id);
 	}
 	function profile()
 	{
