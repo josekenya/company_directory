@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2015 at 03:02 PM
+-- Generation Time: May 06, 2015 at 06:05 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -28,8 +28,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `company_details` (
 `company_id` int(11) NOT NULL,
-  `owner_id` int(11) NOT NULL,
+  `owner_id` varchar(255) NOT NULL,
   `company_name` varchar(255) NOT NULL,
+  `industry_category` int(11) DEFAULT NULL,
   `company_profile` text,
   `company_logo` varchar(255) DEFAULT NULL,
   `company_email` varchar(255) DEFAULT NULL,
@@ -45,16 +46,9 @@ CREATE TABLE IF NOT EXISTS `company_details` (
   `opening` varchar(255) DEFAULT NULL,
   `closing` varchar(255) DEFAULT NULL,
   `w_opening` varchar(255) DEFAULT NULL,
-  `w_closing` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `company_details`
---
-
-INSERT INTO `company_details` (`company_id`, `owner_id`, `company_name`, `company_profile`, `company_logo`, `company_email`, `company_mobile_number`, `company_telephone_number`, `street_address`, `city`, `country`, `street_address_2`, `zip_code`, `state_province`, `employee_number`, `opening`, `closing`, `w_opening`, `w_closing`) VALUES
-(10, 5, 'julius ltd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, 5, 'jose ltd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+  `w_closing` varchar(255) DEFAULT NULL,
+  `template` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -64,21 +58,9 @@ INSERT INTO `company_details` (`company_id`, `owner_id`, `company_name`, `compan
 
 CREATE TABLE IF NOT EXISTS `company_photos` (
 `id` int(11) NOT NULL,
-  `photo_url` varchar(11) NOT NULL,
+  `photo_url` varchar(255) NOT NULL,
   `company_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `company_services`
---
-
-CREATE TABLE IF NOT EXISTS `company_services` (
-`id` int(11) NOT NULL,
-  `service` varchar(255) NOT NULL,
-  `company_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -121,11 +103,37 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 
 CREATE TABLE IF NOT EXISTS `messages` (
 `message_id` int(11) NOT NULL,
+  `message` varchar(255) NOT NULL,
   `company_id` int(11) NOT NULL,
-  `message` text NOT NULL,
+  `unread` int(11) DEFAULT NULL,
+  `read` int(11) DEFAULT NULL,
   `sender` varchar(255) NOT NULL,
-  `unread` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `duration` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE IF NOT EXISTS `services` (
+`service_id` int(11) NOT NULL,
+  `service_name` varchar(255) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`service_id`, `service_name`, `company_id`) VALUES
+(22, 'caej', 12),
+(23, 'prive', 12),
+(24, 'jnjkkjk ', 12),
+(25, 'bbnbnm', 12),
+(79, 'kyi', 15),
+(80, 'hfg', 15);
 
 -- --------------------------------------------------------
 
@@ -171,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
 (1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, 'MOWpMUUZJ1icFXHn/2n0PO', 1268889823, 1430067888, 1, 'Admin', 'istrator', 'ADMIN', '0'),
-(5, '::1', 'joseph mboya', '$2y$08$Tt0H2sN83byWbl4f/4Hj5eOCqn1xWkkvjwOAKUfJIJm3Q6DkGmE/m', NULL, 'josephmboya6@gmail.com', NULL, NULL, NULL, 'CYVf8yk8QRrsu.ZcCh1eZe', 1430042890, 1430312025, 1, 'joseph', 'mboya', NULL, '0715053212'),
+(5, '::1', 'joseph mboya', '$2y$08$Tt0H2sN83byWbl4f/4Hj5eOCqn1xWkkvjwOAKUfJIJm3Q6DkGmE/m', NULL, 'josephmboya6@gmail.com', NULL, NULL, NULL, 'LrrojWC0blaUxBfZW.ZbP.', 1430042890, 1430926519, 1, 'joseph', 'mboya', NULL, '0715053212'),
 (6, '::1', 'kelvin king', '$2y$08$UmpTlkKNUCIjaLH8nbxSheTlgD/jb9zDJRKfN3955yoS.vLQUJWme', NULL, 'kelvin@gmail.com', NULL, NULL, NULL, NULL, 1430043517, NULL, 1, 'kelvin', 'king', NULL, '07234566772');
 
 -- --------------------------------------------------------
@@ -204,19 +212,13 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 -- Indexes for table `company_details`
 --
 ALTER TABLE `company_details`
- ADD PRIMARY KEY (`company_id`);
+ ADD PRIMARY KEY (`company_id`), ADD FULLTEXT KEY `company_profile` (`company_profile`), ADD FULLTEXT KEY `company_name` (`company_name`), ADD FULLTEXT KEY `city` (`city`);
 
 --
 -- Indexes for table `company_photos`
 --
 ALTER TABLE `company_photos`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `company_id_3` (`company_id`), ADD KEY `company_id` (`company_id`), ADD KEY `company_id_2` (`company_id`);
-
---
--- Indexes for table `company_services`
---
-ALTER TABLE `company_services`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `company_id` (`company_id`), ADD KEY `company_id_2` (`company_id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `groups`
@@ -234,7 +236,13 @@ ALTER TABLE `login_attempts`
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
- ADD PRIMARY KEY (`message_id`), ADD UNIQUE KEY `company_id` (`company_id`);
+ ADD PRIMARY KEY (`message_id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+ ADD PRIMARY KEY (`service_id`);
 
 --
 -- Indexes for table `templates`
@@ -262,17 +270,12 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `company_details`
 --
 ALTER TABLE `company_details`
-MODIFY `company_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `company_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `company_photos`
 --
 ALTER TABLE `company_photos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `company_services`
---
-ALTER TABLE `company_services`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -287,7 +290,12 @@ MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `templates`
 --
@@ -306,24 +314,6 @@ MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `company_photos`
---
-ALTER TABLE `company_photos`
-ADD CONSTRAINT `company_photos_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company_details` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `company_services`
---
-ALTER TABLE `company_services`
-ADD CONSTRAINT `company_services_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company_details` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `messages`
---
-ALTER TABLE `messages`
-ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company_details` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users_groups`

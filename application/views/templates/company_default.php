@@ -35,6 +35,28 @@
     {
         color: red;
     }
+    .file
+    {
+        width: 100px;
+        height: 100px;
+
+    }
+    .img-container
+    {
+        display: inline-block;
+    }
+    .img-container img
+    {
+       width: 100px;
+    }
+    .unread
+    {
+        background-color: #DAD5D5;
+    }
+    #msg-container tr
+    {
+      cursor: pointer;
+    }
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

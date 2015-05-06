@@ -4,6 +4,7 @@ class Me extends CI_Controller
 	function _construct()
 	{
 		parent::_construct();
+		
 	}
 
 	function index()
@@ -11,7 +12,7 @@ class Me extends CI_Controller
 		if (!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
-			redirect('search', 'refresh');
+			redirect('pages/search', 'refresh');
 		}
 		else
 		{
@@ -49,7 +50,7 @@ class Me extends CI_Controller
 		if (!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
-			redirect('search', 'refresh');
+			redirect('pages/search', 'refresh');
 		}
 		else
 		{
@@ -87,7 +88,7 @@ class Me extends CI_Controller
 
 		if (!$this->ion_auth->logged_in())
 		{
-			redirect('search', 'refresh');
+			redirect('pages/search', 'refresh');
 		}
 		//$user = $this->ion_auth->user()->row();
 		if ($this->form_validation->run() == false)
@@ -124,6 +125,6 @@ class Me extends CI_Controller
 		$logout = $this->ion_auth->logout();
 		//redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('search', 'refresh');
+		redirect('pages/search', 'refresh');
 	}
 }

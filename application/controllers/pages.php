@@ -1,20 +1,55 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Search extends CI_Controller
+class Pages extends CI_Controller
 {
 	function _construct()
 	{
 		parent::_construct();
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 	}
-	function index()
+	function search($search_terms = '', $start = 0)
 	{
 		if (!$this->ion_auth->logged_in())
 		{
-			//redirect them to the login page
-			//redirect('auth/login', 'refresh');
-			$data=array('page_title'=>'Search here');
-		    $this->template->load('home', 'pages/search_home_v', $data);
+			// If the form has been submitted, rewrite the URL so that the search
+        // terms can be passed as a parameter to the action. Note that there
+        // are some issues with certain characters here.
+        if ($this->input->post('q'))
+        {
+            redirect('/pages/search/' . $this->input->post('q'));
+        }
+ 
+        if ($search_terms)
+        {
+            // Determine the number of results to display per page
+            $results_per_page = $this->config->item('results_per_page');
+ 
+            // Load the model, perform the search and establish the total
+            // number of results
+            //$this->load->model('page_model');
+            $results = $this->company_m->search($search_terms, $start, $results_per_page);
+            $total_results = $this->company_m->count_search_results($search_terms);
+ 
+            // Call a method to setup pagination
+            $this->_setup_pagination('/pages/search/' . $search_terms . '/', $total_results, $results_per_page);
+ 
+            // Work out which results are being displayed
+            $first_result = $start + 1;
+            $last_result = min($start + $results_per_page, $total_results);
+        }
+ 
+        // Render the view, passing it the necessary data
+        $data= array(
+        	'page_title'=>'Search Company',
+            'search_terms' => $search_terms,
+            'first_result' => @$first_result,
+            'last_result' => @$last_result,
+            'total_results' => @$total_results,
+            'results' => @$results
+        );
+        $this->template->load('home', 'pages/search_home_v', $data);
+
+        
 		}
 		//$data=array('page_title'=>'Search here');
 		//$this->template->load('home', 'pages/search_home_v', $data);
@@ -54,7 +89,7 @@ class Search extends CI_Controller
 			//the user is not logging in so display the login page
 			//set the flash data error message if there is one
 			$data['errors'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			echo json_encode($data);
+			 echo json_encode($data);
 		}
 	}
 	
@@ -88,7 +123,7 @@ class Search extends CI_Controller
 			//check to see if we are creating the user
 			//redirect them back to the admin page
 			$data['success']= $this->ion_auth->messages();
-			echo json_encode($data);
+			return json_encode($data);
 			//redirect("auth", 'refresh');
 		}
 		else
@@ -96,9 +131,49 @@ class Search extends CI_Controller
 			//display the create user form
 			//set the flash data error message if there is one
 			$data['errors'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
-             echo json_encode($data);
+             return json_encode($data);
 	
 		}
 	}
+
+	
+    function _setup_pagination($url, $total_results, $results_per_page)
+    {
+        // Ensure the pagination library is loaded
+        $this->load->library('pagination');
+ 
+        // This is messy. I'm not sure why the pagination class can't work
+        // this out itself...
+        $uri_segment = count(explode('/', $url));
+ 
+        // Initialise the pagination class, passing in some minimum parameters
+        $this->pagination->initialize(array(
+            'base_url' => site_url($url),
+            'uri_segment' => $uri_segment,
+            'total_rows' => $total_results,
+            'per_page' => $results_per_page
+        ));
+    }
+    function send_message()
+    {
+    	$this->form_validation->set_rules('message','Message','required');
+		 if($this->form_validation->run()==false)
+		 {
+	       $data['errors']=validation_errors();
+	       echo json_encode($data);
+		 }	
+		 else
+		 {
+		  $this->company_m->add_message();
+		  $data['success']="Message Sent";
+		  echo json_encode($data);
+		 }
+    }
+    function company_info()
+    {
+    	$id=$this->input->post('id');
+    	$data['info']=$this->company_m->get_co_details($id);
+    	echo json_encode($data);
+    }
 
 }

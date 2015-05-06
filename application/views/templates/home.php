@@ -67,6 +67,78 @@
     <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="<?php echo base_url();?>assets/js/index.js"></script>
+    <script src="<?php echo base_url();?>assets/js/home.js"></script>
+    <script>
+    $(function(){
+      $('body').on('click','.badger',function(e){
+        var c_id=$(this).attr('data-id');
+        $.ajax({type:"POST",
+          url:"/company_directory/pages/company_info",
+          dataType:"json",
+          cache:false,
+          data:{id:c_id},
+          success:function(result)
+          {
+            var i= result.info;
+            console.log(i.company_name);
+            (i.company_logo==null)?$("body").find("#logo-img").attr('src','/company_directory/assets/images/logos/logo-holder.png'):$("body").find("#logo-img").attr('src','/company_directory/assets/images/logos/'+i.company_logo);
+            $("#co-name").html(i.company_name);
+            $("#co-id").attr('value',i.company_id);
+            $(".profile").html(i.company_profile);
+            $(".opening").html(i.opening);
+            $(".closing").html(i.closing);
+            $(".w-opening").html(i.w_opening);
+            $(".w-closing").html(i.w_closing);
+            $(".street").html(i.street_address);
+            $(".city").html(i.city);
+            $(".country").html(i.country);
+            $(".zip").html(i.zip);
+            $(".mobile").html(i.company_mobile_number);
+            $(".tel").html(i.company_telephone_number);
+            $(".email").html(i.company_email);
+
+            $('#basic').modal('show');
+          }
+          });
+           e.preventDefault();
+      });
+ /*send message  */
+  $('#message_btn').click(function(e){
+      $('#message_form').validate({
+      submitHandler:function()
+      {
+      var sentData=$.ajax({   
+      type: "POST",
+      url: "/company_directory/pages/send_message",
+      data: $("#message_form").serialize(),
+      cache: false,
+      //dataType:"json",
+      beforeSend: function(){
+      $(".show-progress").removeClass('hide');},
+      complete: function(){
+      $(".show-progress").addClass('hide');}
+      });
+      sentData.done(function(result){
+      var response=JSON.parse(result);
+      if(response.success)
+      {
+      $(".show-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
+      $("#message").val('');
+      $("#email").val('');
+      }else
+      {
+      $(".show-error").html(response.errors).removeClass('hide');
+      }
+      }); 
+      sentData.fail(function(jqXHR,textStatus){
+      $(".show-error").html(textStatus).removeClass('hide');
+      });
+      e.preventDefault();
+      }
+      });
+ });
+
+    });
+    </script>
   </body>
 </html>

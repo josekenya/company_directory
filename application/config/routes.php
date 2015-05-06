@@ -38,8 +38,10 @@
 |
 */
 
-$route['default_controller'] = "search";
+$route['default_controller'] = "pages/search";
 $route['company/(:num)']="company";
+$route['pages/search/me']="me";
+$route['pages/me']="me";
 $route['404_override'] = '';
 
 
