@@ -21,10 +21,10 @@
                                     <?php if(is_array($co)): ?>     
                                    <?php foreach ($co as $company) :?>
                                      <tr>
-                                        <td><?php echo htmlspecialchars($company['company_name'],ENT_QUOTES,'UTF-8');?><?php echo $company['company_id']; ?></td>
+                                        <td><?php echo htmlspecialchars($company['c_name'],ENT_QUOTES,'UTF-8');?><?php echo $company['id']; ?></td>
                                         <td>
-                                            <a  href="<?php echo base_url();?>company/<?php echo $company['company_id']; ?>" id="manage-co-btn"  class="btn btn-success">Manage</a>
-                                            <button data-ids="<?php echo $company['company_id']; ?>" id="fire-delete-co" type="button" class="btn btn-danger">Delete</button>
+                                            <a  href="<?php echo base_url();?>company/<?php echo $company['id']; ?>" id="manage-co-btn"  class="btn btn-success">Manage</a>
+                                            <button data-ids="<?php echo $company['id']; ?>" id="fire-delete-co" type="button" class="btn btn-danger">Delete</button>
                                       
                                         </td>
                                      </tr>

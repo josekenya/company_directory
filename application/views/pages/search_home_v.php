@@ -31,7 +31,7 @@
                   
                   <ul class="list-unstyled">
                   <?php foreach ($results as $result): ?>
-                    <li><?php if($result->company_logo == null){  ?><img src="/company_directory/assets/images/logos/logo-holder.png" alt="..." style="width:80px;" class="img-rounded"><?php }else{ ?><img src="/company_directory/assets/images/logos/<?php echo $result->company_logo; ?>" alt="..." style="width:80px;" class="img-rounded"> <?php } ?> <a href="#"><?php echo search_highlight($result->company_name, $search_terms); ?></a>    <span style="cursor:pointer" data-id="<?php echo $result->company_id; ?>" id="#<?php echo $result->template; ?>" class="badger label label-danger">Preview</span><br /><?php echo search_extract($result->company_profile, $search_terms); ?></li>
+                    <li><?php if($result->c_logo == null){  ?><img src="/company_directory/assets/images/logos/logo-holder.png" alt="..." style="width:80px;" class="img-rounded"><?php }else{ ?><img src="/company_directory/assets/images/logos/<?php echo $result->c_logo; ?>" alt="..." style="width:80px;" class="img-rounded"> <?php } ?> <a href="#"><?php echo search_highlight($result->c_name, $search_terms); ?></a>    <span style="cursor:pointer" data-id="<?php echo $result->id; ?>" id="#<?php echo $result->c_template; ?>" class="badger label label-danger">Preview</span><br /><?php echo search_extract($result->c_prof, $search_terms); ?></li>
                   <?php endforeach ?>
                   </ul>
                   

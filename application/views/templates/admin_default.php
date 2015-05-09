@@ -136,7 +136,7 @@
     </script>
    
     <!-- Custom Theme JavaScript -->
-     <script src="<?php echo base_url();?>assets/js/index.js"></script>
+     <script src="<?php echo base_url();?>assets/js/admin.js"></script>
     <script src="<?php echo base_url();?>assets/js/sb-admin-2.js"></script>
 </body>
 

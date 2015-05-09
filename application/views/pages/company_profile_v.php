@@ -3,7 +3,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Profile Settings
-                            <?php echo $company['company_id']; ?>
+                            <?php echo $company['id']; ?>
                             <?php //foreach ($company as $co) {
                                 # code...
                                 //echo $co['company_id'];
@@ -50,24 +50,24 @@
                                         <div class="form-group">
                                         <label for="co-name" class="col-sm-3 control-label">Company Name</label>
                                         <div class="col-sm-6">
-                                        <input type="text" class="form-control" name="co-name" value="<?php echo ucwords(strtolower($company['company_name'])); ?>" id="co-name"  required>
+                                        <input type="text" class="form-control" name="co-name" value="<?php echo ucwords(strtolower($company['c_name'])); ?>" id="co-name"  required>
                                         </div>
                                         </div>
                                         <div class="form-group">
                                         <label for="industry-category" class="col-sm-3 control-label">Industry Category</label>
                                         <div class="col-sm-6">
                                         <select class="form-control" name="industry-category">
-                                          <option value="1" <?php echo ($company['industry_category']==2)? "selected" :" "; ?>>Food and Processing</option>
-                                          <option value="2" <?php echo ($company['industry_category']==2)? "selected" :" "; ?>>Manufacturing</option>
-                                          <option value="3" <?php echo ($company['industry_category']==3)? "selected" :" "; ?>>Entertainment</option>
-                                          <option value="4" <?php echo ($company['industry_category']==4)? "selected" :" "; ?>>Technology</option>
-                                          <option value="5" <?php echo ($company['industry_category']==5)? "selected" :" "; ?>>Building & Construction</option>
-                                          <option value="6" <?php echo ($company['industry_category']==6)? "selected" :" "; ?>>Tourism</option>
-                                          <option value="7" <?php echo ($company['industry_category']==7)? "selected" :" "; ?>>Hospitality</option>
-                                          <option value="8" <?php echo ($company['industry_category']==8)? "selected" :" "; ?>>Law</option>
-                                          <option value="9" <?php echo ($company['industry_category']==9)? "selected" :" "; ?>>Agriculture</option>
+                                          <option value="food" <?php echo ($company['c_ind_cat']=="food")? "selected" :" "; ?>>Food and Processing</option>
+                                          <option value="manufacture" <?php echo ($company['c_ind_cat']=="manufacture")? "selected" :" "; ?>>Manufacturing</option>
+                                          <option value="ent" <?php echo ($company['c_ind_cat']=="ent")? "selected" :" "; ?>>Entertainment</option>
+                                          <option value="tech" <?php echo ($company['c_ind_cat']=="tech")? "selected" :" "; ?>>Technology</option>
+                                          <option value="building" <?php echo ($company['c_ind_cat']=="building")? "selected" :" "; ?>>Building & Construction</option>
+                                          <option value="tourism" <?php echo ($company['c_ind_cat']=="tourism")? "selected" :" "; ?>>Tourism</option>
+                                          <option value="hosp" <?php echo ($company['c_ind_cat']=="hosp")? "selected" :" "; ?>>Hospitality</option>
+                                          <option value="law" <?php echo ($company['c_ind_cat']=="law")? "selected" :" "; ?>>Law</option>
+                                          <option value="agriculture" <?php echo ($company['c_ind_cat']=="agriculture")? "selected" :" "; ?>>Agriculture</option>
                                         </select>
-                                        <input type="hidden" name="company-id" value="<?php echo $company['company_id']; ?>">
+                                        <input type="hidden" name="company-id" value="<?php echo $company['id']; ?>">
                                         <input type="hidden" name="user-id" value="<?php echo $this->session->userdata('user_id'); ?>">
                                         </div>
                                         </div>
@@ -89,20 +89,20 @@
                                         <div class="form-group">
                                         <label for="mobile-number" class="col-sm-3 control-label">Mobile Number</label>
                                         <div class="col-sm-6">
-                                        <input type="tel" class="form-control" name="mobile-number" value="<?php echo $company['company_mobile_number']; ?>" id="mobile-number" placeholder="Mobile Number" required>
+                                        <input type="tel" class="form-control" name="mobile-number" value="<?php echo $company['c_mobile']; ?>" id="mobile-number" placeholder="Mobile Number" required>
                                         </div>
                                         </div>
                                         <div class="form-group">
                                         <label for="tel-number" class="col-sm-3 control-label">Telephone Number</label>
                                         <div class="col-sm-6">
-                                        <input type="tel" class="form-control" name="tel-number" value="<?php echo $company['company_telephone_number']; ?>" id="tel-number" placeholder="Telephone Number" >
+                                        <input type="tel" class="form-control" name="tel-number" value="<?php echo $company['c_tel']; ?>" id="tel-number" placeholder="Telephone Number" >
                                         </div>
                                         </div>
                                         <div class="form-group">
                                         <label for="email" class="col-sm-3 control-label">Company Email</label>
                                         <div class="col-sm-6">
-                                        <input type="email" class="form-control" name="email" id="email" value="<?php echo strtolower($company['company_email']); ?>" placeholder="Company Email" required>
-                                        <input type="hidden" name="company-id" value="<?php echo $company['company_id']; ?>">
+                                        <input type="email" class="form-control" name="email" id="email" value="<?php echo strtolower($company['c_email']); ?>" placeholder="Company Email" required>
+                                        <input type="hidden" name="company-id" value="<?php echo $company['id']; ?>">
                                         <input type="hidden" name="user-id" value="<?php echo $this->session->userdata('user_id'); ?>">
                                         </div>
                                         </div>
@@ -124,9 +124,9 @@
                                         <div class="form-group">
                                         <div class="col-sm-9">
                                         <textarea  class="form-control" name="company-profile" id="company-profile">
-                                            <?php echo $company['company_profile']; ?>
+                                            <?php echo $company['c_prof']; ?>
                                         </textarea>
-                                        <input type="hidden" name="company-id" value="<?php echo $company['company_id']; ?>">
+                                        <input type="hidden" name="company-id" value="<?php echo $company['id']; ?>">
                                         <input type="hidden" name="user-id" value="<?php echo $this->session->userdata('user_id'); ?>">
                                         </div>
                                         </div>
@@ -149,33 +149,33 @@
                                         <div class="form-group">
                                         <label for="street-address-1" class="col-sm-3 control-label">Street Address 1</label>
                                         <div class="col-sm-6">
-                                        <input type="text" class="form-control" value="<?php echo ucwords(strtolower($company['street_address'])); ?>" name="street-address-1" id="street-address-1" placeholder="Street Address 1" required>
+                                        <input type="text" class="form-control" value="<?php echo ucwords(strtolower($company['c_address_1'])); ?>" name="street-address-1" id="street-address-1" placeholder="Street Address 1" required>
                                         </div>
                                         </div>
                                         <div class="form-group">
                                         <label for="street-address-2" class="col-sm-3 control-label">Street Address 2</label>
                                         <div class="col-sm-6">
-                                        <input type="text" class="form-control" value="<?php echo ucwords(strtolower($company['street_address_2'])); ?>" name="street-address-2" id="street-address-2" placeholder="Street Address 2 " >
+                                        <input type="text" class="form-control" value="<?php echo ucwords(strtolower($company['c_address_2'])); ?>" name="street-address-2" id="street-address-2" placeholder="Street Address 2 " >
                                         </div>
                                         </div>
                                         <div class="form-group">
                                         <label for="zip-code" class="col-sm-3 control-label">Zip Code</label>
                                         <div class="col-sm-6">
-                                        <input type="text" class="form-control" value="<?php echo $company['zip_code']; ?>" name="zip-code" id="zip-code" placeholder="Zip Code" required>
+                                        <input type="text" class="form-control" value="<?php echo $company['c_zip']; ?>" name="zip-code" id="zip-code" placeholder="Zip Code" required>
 
                                         </div>
                                         </div>
                                         <div class="form-group">
                                         <label for="city" class="col-sm-3 control-label">City / Town</label>
                                         <div class="col-sm-6">
-                                        <input type="text" class="form-control" value="<?php echo ucfirst(strtolower($company['city'])); ?>" name="city" id="city" placeholder="City / Town" required>
+                                        <input type="text" class="form-control" value="<?php echo ucfirst(strtolower($company['c_city'])); ?>" name="city" id="city" placeholder="City / Town" required>
                                         </div>
                                         </div>
                                         <div class="form-group">
                                         <label for="country" class="col-sm-3 control-label">Country</label>
                                         <div class="col-sm-6">
-                                        <input type="text" class="form-control" value="<?php echo  ucfirst(strtolower($company['country'])); ?>" name="country" id="country" placeholder="Country" required>
-                                        <input type="hidden" name="company-id" value="<?php echo $company['company_id']; ?>">
+                                        <input type="text" class="form-control" value="<?php echo  ucfirst(strtolower($company['c_country'])); ?>" name="country" id="country" placeholder="Country" required>
+                                        <input type="hidden" name="company-id" value="<?php echo $company['id']; ?>">
                                         <input type="hidden" name="user-id" value="<?php echo $this->session->userdata('user_id'); ?>">
                                         </div>
                                         </div>
@@ -198,19 +198,19 @@
                                         <label for="employee-number" class="col-sm-3 control-label">Employee Number</label>
                                        
                                           <label class="checkbox-inline">
-                                            <input type="radio" name="employeeNo" value="1" <?php echo ($company['employee_number']==1)? "checked" :" "; ?> >
+                                            <input type="radio" name="employeeNo" value="1" <?php echo ($company['c_emp_no']==1)? "checked" :" "; ?> >
                                             10-20
                                           </label>
                                           <label class="checkbox-inline">
-                                            <input type="radio" name="employeeNo" value="2" <?php echo ($company['employee_number']==2)? "checked" :" "; ?> >
+                                            <input type="radio" name="employeeNo" value="2" <?php echo ($company['c_emp_no']==2)? "checked" :" "; ?> >
                                             20-50
                                           </label>
                                           <label class="checkbox-inline">
-                                            <input type="radio" name="employeeNo" value="3" <?php echo ($company['employee_number']==3)? "checked" :" "; ?> >
+                                            <input type="radio" name="employeeNo" value="3" <?php echo ($company['c_emp_no']==3)? "checked" :" "; ?> >
                                             50-100
                                           </label>
                                           <label class="checkbox-inline">
-                                            <input type="radio" name="employeeNo" value="4" <?php echo ($company['employee_number']==4)? "checked" :" "; ?> >
+                                            <input type="radio" name="employeeNo" value="4" <?php echo ($company['c_emp_no']==4)? "checked" :" "; ?> >
                                             Above 100
                                           </label>
                                       
@@ -218,20 +218,20 @@
                                         <div class="form-group">
                                         <label for="new-password" class="col-sm-3 control-label">Weekdays Business Hours</label>
                                         <div class="col-sm-3">
-                                        <input type="time" class="form-control" value="<?php echo $company['opening']; ?>" name="opening" id="opening" placeholder="--.--AM" >
+                                        <input type="time" class="form-control" value="<?php echo $company['c_w_opening']; ?>" name="opening" id="opening" placeholder="--.--AM" >
                                         </div>
                                         <div class="col-sm-3">
-                                        <input type="time" class="form-control" value="<?php echo $company['closing']; ?>" name="closing" id="closing" placeholder="--.--PM" >
+                                        <input type="time" class="form-control" value="<?php echo $company['c_w_closing']; ?>" name="closing" id="closing" placeholder="--.--PM" >
                                         </div>
                                         </div>
                                         <div class="form-group">
                                         <label for="confirm-password" class="col-sm-3 control-label">Weekend Business Hours</label>
                                         <div class="col-sm-3">
-                                        <input type="time" class="form-control" value="<?php echo $company['w_opening']; ?>" name="w-opening" id="w-opening" placeholder="--.--AM" >
+                                        <input type="time" class="form-control" value="<?php echo $company['c_we_opening']; ?>" name="w-opening" id="w-opening" placeholder="--.--AM" >
                                         </div>
                                         <div class="col-sm-3">
-                                        <input type="time" class="form-control" value="<?php echo $company['w_opening']; ?>" name="w-closing" id="w-closing" placeholder="--.--PM" >
-                                        <input type="hidden" name="company-id" value="<?php echo $company['company_id']; ?>">
+                                        <input type="time" class="form-control" value="<?php echo $company['c_we_opening']; ?>" name="w-closing" id="w-closing" placeholder="--.--PM" >
+                                        <input type="hidden" name="company-id" value="<?php echo $company['id']; ?>">
                                         <input type="hidden" name="user-id" value="<?php echo $this->session->userdata('user_id'); ?>">
                                         </div>
                                         </div>
@@ -265,7 +265,7 @@
                                     <div class="input_fields_wrap">
                                         <div class="col-sm-3">
                                          <input class="form-control " type="text" class="add_service" placeholder="Press Enter to add service" />
-                                         <input type="hidden" id="company-id" name="company-id" value="<?php echo $company['company_id']; ?>">
+                                         <input type="hidden" id="company-id" name="company-id" value="<?php echo $company['id']; ?>">
                                          <label class="error-label hide label-danger">This field cannot be empty</label>
                                         </div>
                                     </div>
@@ -282,7 +282,7 @@
                                         <form class="form-inline" id="add-photo-form" method="post" action="http://localhost/company_directory/company/add_photo" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <input  class="form-control" id="upload-file" type="file" name="upload-file">
-                                                <input type="hidden" name="company-id" value="<?php echo $company['company_id']; ?>">
+                                                <input type="hidden" name="company-id" value="<?php echo $company['id']; ?>">
                                             </div>
                                             <button type="submit" class="btn btn-primary">Upload</button>
                                         </form>
@@ -313,7 +313,7 @@
                                     <h4></h4>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <input type="hidden" id="msg" value="<?php echo $company['company_id']; ?>">
+                                            <input type="hidden" id="msg" value="<?php echo $company['id']; ?>">
                                             <table id="msg-container"  class="table">
                                               
                                             </table> 
@@ -333,7 +333,7 @@
                                         </div>
                                         <div class="col-sm-6">
                         
-                                        <input type="hidden" name="company-id" value="<?php echo $company['company_id']; ?>">
+                                        <input type="hidden" name="company-id" value="<?php echo $company['id']; ?>">
                                         <input type="hidden" name="user-id" value="<?php echo $this->session->userdata('user_id'); ?>">
                                         </div>
                                         </div>

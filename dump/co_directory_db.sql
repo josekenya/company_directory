@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2015 at 06:05 PM
+-- Generation Time: May 09, 2015 at 03:48 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -23,32 +23,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_details`
+-- Table structure for table `company_information`
 --
 
-CREATE TABLE IF NOT EXISTS `company_details` (
-`company_id` int(11) NOT NULL,
-  `owner_id` varchar(255) NOT NULL,
-  `company_name` varchar(255) NOT NULL,
-  `industry_category` int(11) DEFAULT NULL,
-  `company_profile` text,
-  `company_logo` varchar(255) DEFAULT NULL,
-  `company_email` varchar(255) DEFAULT NULL,
-  `company_mobile_number` varchar(255) DEFAULT NULL,
-  `company_telephone_number` varchar(255) DEFAULT NULL,
-  `street_address` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `street_address_2` varchar(255) DEFAULT NULL,
-  `zip_code` varchar(255) DEFAULT NULL,
-  `state_province` varchar(255) DEFAULT NULL,
-  `employee_number` varchar(255) DEFAULT NULL,
-  `opening` varchar(255) DEFAULT NULL,
-  `closing` varchar(255) DEFAULT NULL,
-  `w_opening` varchar(255) DEFAULT NULL,
-  `w_closing` varchar(255) DEFAULT NULL,
-  `template` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `company_information` (
+`id` int(11) NOT NULL,
+  `c_name` text NOT NULL,
+  `c_ind_cat` varchar(200) NOT NULL,
+  `c_logo` varchar(200) DEFAULT NULL,
+  `c_prof` text NOT NULL,
+  `c_owner_id` int(11) NOT NULL,
+  `c_mobile` varchar(200) NOT NULL,
+  `c_tel` varchar(200) NOT NULL,
+  `c_email` varchar(200) NOT NULL,
+  `c_address_1` varchar(200) NOT NULL,
+  `c_address_2` varchar(200) NOT NULL,
+  `c_city` varchar(200) NOT NULL,
+  `c_country` varchar(200) NOT NULL,
+  `c_zip` mediumint(9) NOT NULL,
+  `c_state` varchar(200) NOT NULL,
+  `c_emp_no` int(11) NOT NULL,
+  `c_w_opening` varchar(200) NOT NULL,
+  `c_w_closing` varchar(200) NOT NULL,
+  `c_we_opening` varchar(200) NOT NULL,
+  `c_we_closing` varchar(200) NOT NULL,
+  `c_template` varchar(200) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `company_information`
+--
+
+INSERT INTO `company_information` (`id`, `c_name`, `c_ind_cat`, `c_logo`, `c_prof`, `c_owner_id`, `c_mobile`, `c_tel`, `c_email`, `c_address_1`, `c_address_2`, `c_city`, `c_country`, `c_zip`, `c_state`, `c_emp_no`, `c_w_opening`, `c_w_closing`, `c_we_opening`, `c_we_closing`, `c_template`) VALUES
+(1, 'Zinduka Ltd', 'hosp', NULL, 'Zinduka is great co                                                                                    ', 5, '713467898', '21344800', 'zinduka@gmail.com', 'random', '', 'Nairobi', 'Kenya', 2100, '', 0, '', '', '', '', 'basic'),
+(2, 'Company Z', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(3, 'My Company Ltd', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(4, 'Eazy Ltd', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(5, 'Gregory Limited', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(6, 'Kazoon Ld', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(7, 'Kappa Ltd', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -60,7 +73,15 @@ CREATE TABLE IF NOT EXISTS `company_photos` (
 `id` int(11) NOT NULL,
   `photo_url` varchar(255) NOT NULL,
   `company_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `company_photos`
+--
+
+INSERT INTO `company_photos` (`id`, `photo_url`, `company_id`) VALUES
+(1, 'cap12.PNG', 20),
+(2, 'Capture4.PNG', 20);
 
 -- --------------------------------------------------------
 
@@ -109,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `read` int(11) DEFAULT NULL,
   `sender` varchar(255) NOT NULL,
   `duration` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -121,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `services` (
 `service_id` int(11) NOT NULL,
   `service_name` varchar(255) NOT NULL,
   `company_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `services`
@@ -133,19 +154,10 @@ INSERT INTO `services` (`service_id`, `service_name`, `company_id`) VALUES
 (24, 'jnjkkjk ', 12),
 (25, 'bbnbnm', 12),
 (79, 'kyi', 15),
-(80, 'hfg', 15);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `templates`
---
-
-CREATE TABLE IF NOT EXISTS `templates` (
-`template_id` int(11) NOT NULL,
-  `template_name` varchar(255) NOT NULL,
-  `template_url` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(80, 'hfg', 15),
+(81, 'Processing', 20),
+(82, 'Manufacturing', 20),
+(83, 'Service 1', 1);
 
 -- --------------------------------------------------------
 
@@ -171,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(50) DEFAULT NULL,
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -179,8 +191,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
 (1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, 'MOWpMUUZJ1icFXHn/2n0PO', 1268889823, 1430067888, 1, 'Admin', 'istrator', 'ADMIN', '0'),
-(5, '::1', 'joseph mboya', '$2y$08$Tt0H2sN83byWbl4f/4Hj5eOCqn1xWkkvjwOAKUfJIJm3Q6DkGmE/m', NULL, 'josephmboya6@gmail.com', NULL, NULL, NULL, 'LrrojWC0blaUxBfZW.ZbP.', 1430042890, 1430926519, 1, 'joseph', 'mboya', NULL, '0715053212'),
-(6, '::1', 'kelvin king', '$2y$08$UmpTlkKNUCIjaLH8nbxSheTlgD/jb9zDJRKfN3955yoS.vLQUJWme', NULL, 'kelvin@gmail.com', NULL, NULL, NULL, NULL, 1430043517, NULL, 1, 'kelvin', 'king', NULL, '07234566772');
+(5, '::1', 'joseph mboya', '$2y$08$Tt0H2sN83byWbl4f/4Hj5eOCqn1xWkkvjwOAKUfJIJm3Q6DkGmE/m', NULL, 'josephmboya6@gmail.com', NULL, NULL, NULL, 'XObfRcRi.iNdzwL1z4X5je', 1430042890, 1431167179, 1, 'joseph', 'mboya', NULL, '0715053212'),
+(6, '::1', 'kelvin king', '$2y$08$UmpTlkKNUCIjaLH8nbxSheTlgD/jb9zDJRKfN3955yoS.vLQUJWme', NULL, 'kelvin@gmail.com', NULL, NULL, NULL, NULL, 1430043517, NULL, 1, 'kelvin', 'king', NULL, '07234566772'),
+(7, '::1', 'mark masa', '$2y$08$Lsvow7vQtjZRQngin4X5gOKgx.G8cuc1QpCi7ILrWiBLuX0Yz7PsK', NULL, 'masa@gmail.com', NULL, NULL, NULL, NULL, 1430938998, NULL, 1, 'Mark', 'Masa', NULL, '0765212234');
 
 -- --------------------------------------------------------
 
@@ -192,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 `id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   `group_id` mediumint(8) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users_groups`
@@ -202,17 +215,18 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
 (6, 5, 2),
-(7, 6, 2);
+(7, 6, 2),
+(8, 7, 2);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `company_details`
+-- Indexes for table `company_information`
 --
-ALTER TABLE `company_details`
- ADD PRIMARY KEY (`company_id`), ADD FULLTEXT KEY `company_profile` (`company_profile`), ADD FULLTEXT KEY `company_name` (`company_name`), ADD FULLTEXT KEY `city` (`city`);
+ALTER TABLE `company_information`
+ ADD PRIMARY KEY (`id`), ADD FULLTEXT KEY `c_name` (`c_name`,`c_ind_cat`,`c_prof`,`c_address_1`,`c_address_2`,`c_city`,`c_country`,`c_state`), ADD FULLTEXT KEY `c_prof` (`c_prof`), ADD FULLTEXT KEY `c_name_2` (`c_name`), ADD FULLTEXT KEY `c_name_3` (`c_name`);
 
 --
 -- Indexes for table `company_photos`
@@ -245,12 +259,6 @@ ALTER TABLE `services`
  ADD PRIMARY KEY (`service_id`);
 
 --
--- Indexes for table `templates`
---
-ALTER TABLE `templates`
- ADD PRIMARY KEY (`template_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -267,15 +275,15 @@ ALTER TABLE `users_groups`
 --
 
 --
--- AUTO_INCREMENT for table `company_details`
+-- AUTO_INCREMENT for table `company_information`
 --
-ALTER TABLE `company_details`
-MODIFY `company_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+ALTER TABLE `company_information`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `company_photos`
 --
 ALTER TABLE `company_photos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -290,27 +298,22 @@ MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=81;
---
--- AUTO_INCREMENT for table `templates`
---
-ALTER TABLE `templates`
-MODIFY `template_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=84;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- Constraints for dumped tables
 --

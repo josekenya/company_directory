@@ -3,7 +3,7 @@ class Company_m extends CI_Model
 {
     function get_companies($id)
 	{
-	     $query=$this->db->get_where('company_details',array('owner_id'=>$id));
+	     $query=$this->db->get_where('company_information',array('c_owner_id'=>$id));
 	     if($query->num_rows()>0)
 	     {
 	       $results=$query->result_array();
@@ -113,8 +113,8 @@ class Company_m extends CI_Model
 	function get_co_details($id)
 	{
 		$this->db->select('*');
-		$this->db->from('company_details');
-		$this->db->where('company_id',$id);
+		$this->db->from('company_information');
+		$this->db->where('id',$id);
 		$query=$this->db->get();
 		if($this->db->affected_rows($query))
 		{
@@ -132,8 +132,8 @@ class Company_m extends CI_Model
 	}
 	function company_count($id)
 	{
-		$this->db->where('owner_id',$id);
-		$this->db->from('company_details');
+		$this->db->where('c_owner_id',$id);
+		$this->db->from('company_information');
 		return $this->db->count_all_results();
 	}
 	function add_message()
@@ -155,9 +155,9 @@ class Company_m extends CI_Model
 	}
 	function add_company()
 	{
-	      $company=array('company_name'=>$this->input->post('company-name'),
-	      	             'owner_id'=>$this->input->post('owner-id'));
-	      $query=$this->db->insert('company_details',$company);
+	      $company=array('c_name'=>$this->input->post('company-name'),
+	      	             'c_owner_id'=>$this->input->post('owner-id'));
+	      $query=$this->db->insert('company_information',$company);
 	      if($this->db->affected_rows($query)==1)
 	      {
 	          return true;
@@ -169,10 +169,10 @@ class Company_m extends CI_Model
 	}
 	function delete_company($id)
 	{ 	
-      $result=$this->db->delete('company_details', array('company_id' => $id));
+      $result=$this->db->delete('company_information', array('id' => $id));
       if($this->db->affected_rows($result)==1)
       {
-      	echo "Venue Deleted";
+      	echo "Company Deleted";
       	//return true;
       }
       else
@@ -227,9 +227,9 @@ class Company_m extends CI_Model
 	}
 	function update_info($id)
 	{
-      $data=array('company_name'=>$this->input->post('co-name'),'industry_category'=>$this->input->post('industry-category'));
-      $this->db->where('company_id',$id);
-      $query=$this->db->update('company_details',$data);
+      $data=array('c_name'=>$this->input->post('co-name'),'c_ind_cat'=>$this->input->post('industry-category'));
+      $this->db->where('id',$id);
+      $query=$this->db->update('company_information',$data);
       if($this->db->affected_rows($query)==1)
       {
           return true;
@@ -241,11 +241,11 @@ class Company_m extends CI_Model
 	}
 	function update_contact_info($id)
 	{
-	  $data=array('company_mobile_number'=>$this->input->post('mobile-number'),
-	  	          'company_telephone_number'=>$this->input->post('tel-number'),
-	  	           'company_email'=>$this->input->post('email'));
-      $this->db->where('company_id',$id);
-      $query=$this->db->update('company_details',$data);
+	  $data=array('c_mobile'=>$this->input->post('mobile-number'),
+	  	          'c_tel'=>$this->input->post('tel-number'),
+	  	           'c_email'=>$this->input->post('email'));
+      $this->db->where('id',$id);
+      $query=$this->db->update('company_information',$data);
       if($this->db->affected_rows($query)==1)
       {
           return true;
@@ -257,9 +257,9 @@ class Company_m extends CI_Model
 	}
 	function update_company_profile($id)
 	{
-	  $data=array('company_profile'=>$this->input->post('company-profile'));
-      $this->db->where('company_id',$id);
-      $query=$this->db->update('company_details',$data);
+	  $data=array('c_prof'=>$this->input->post('company-profile'));
+      $this->db->where('id',$id);
+      $query=$this->db->update('company_information',$data);
       if($this->db->affected_rows($query)==1)
       {
           return true;
@@ -271,13 +271,13 @@ class Company_m extends CI_Model
 	}
 	function update_company_address($id)
 	{
-	  $data=array('street_address'=>$this->input->post('street-address-1'),
-	  	          'street_address_2'=>$this->input->post('street-address-2'),
-	  	          'city'=>$this->input->post('city'),
-	  	          'zip_code'=>$this->input->post('zip-code'),
-	  	          'country'=>$this->input->post('country'));
-      $this->db->where('company_id',$id);
-      $query=$this->db->update('company_details',$data);
+	  $data=array('c_address_1'=>$this->input->post('street-address-1'),
+	  	          'c_address_2'=>$this->input->post('street-address-2'),
+	  	          'c_city'=>$this->input->post('city'),
+	  	          'c_zip'=>$this->input->post('zip-code'),
+	  	          'c_country'=>$this->input->post('country'));
+      $this->db->where('id',$id);
+      $query=$this->db->update('company_information',$data);
       if($this->db->affected_rows($query)==1)
       {
           return true;
@@ -289,13 +289,13 @@ class Company_m extends CI_Model
 	}
 	function update_operation_details($id)
 	{
-	  $data=array('employee_number'=>$this->input->post('employeeNo'),
-	  	          'opening'=>$this->input->post('opening'),
-	  	          'closing'=>$this->input->post('closing'),
-	  	          'w_opening'=>$this->input->post('w-opening'),
-	  	          'w_closing'=>$this->input->post('w-closing'));
-      $this->db->where('company_id',$id);
-      $query=$this->db->update('company_details',$data);
+	  $data=array('c_emp_no'=>$this->input->post('employeeNo'),
+	  	          'c_w_opening'=>$this->input->post('opening'),
+	  	          'c_w_closing'=>$this->input->post('closing'),
+	  	          'c_we_opening'=>$this->input->post('w-opening'),
+	  	          'c_we_closing'=>$this->input->post('w-closing'));
+      $this->db->where('id',$id);
+      $query=$this->db->update('company_information',$data);
       if($this->db->affected_rows($query)==1)
       {
           return true;
@@ -307,9 +307,9 @@ class Company_m extends CI_Model
 	}
 	function update_publish($id)
 	{
-	  $data=array('template'=>$this->input->post('templateRadio'));
-      $this->db->where('company_id',$id);
-      $query=$this->db->update('company_details',$data);
+	  $data=array('c_template'=>$this->input->post('templateRadio'));
+      $this->db->where('id',$id);
+      $query=$this->db->update('company_information',$data);
       if($this->db->affected_rows($query)==1)
       {
           return true;
@@ -333,8 +333,8 @@ class Company_m extends CI_Model
  
         // Execute our SQL statement and return the result
         $sql = "SELECT *
-                    FROM company_details
-                    WHERE MATCH (company_profile) AGAINST (?) > 0
+                    FROM company_information
+                    WHERE MATCH (c_prof) AGAINST (?) > 0
                     $limit";
         $query = $this->db->query($sql, array($terms, $terms));
         return $query->result();
@@ -344,8 +344,8 @@ class Company_m extends CI_Model
     {
         // Run SQL to count the total number of search results
         $sql = "SELECT COUNT(*) AS count
-                    FROM company_details
-                    WHERE MATCH (company_profile) AGAINST (?)";
+                    FROM company_information
+                    WHERE MATCH (c_prof) AGAINST (?)";
         $query = $this->db->query($sql, array($terms));
         return $query->row()->count;
     }
