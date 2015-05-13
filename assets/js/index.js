@@ -1,37 +1,4 @@
 $(function(){
-/* basic info edit */
-$('#basic_info_btn').click(function(e){
-	$('#basic_info_form').validate({
-		submitHandler:function()
-		{
-		var sentData=$.ajax({   
-			type: "POST",
-			url: "/company_directory/company/edit_info",
-			data: $("#basic_info_form").serialize(),
-			cache: false,
-			//dataType:"json",
-			beforeSend: function(){ $(".show-progress").removeClass('hide');},
-			complete: function(){ $(".show-progress").addClass('hide');}
-		});
-		sentData.done(function(result){
-		var response=JSON.parse(result);
-			if(response.success)
-			{
-				$(".show-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
-				//location.reload();
-			}
-			else
-			{
-			    $(".show-error").html(response.errors).removeClass('hide');
-			}
-		}); 
-		sentData.fail(function(jqXHR,textStatus){
-		        $(".show-error").html(textStatus).removeClass('hide');
-		});
-		        e.preventDefault();
-		}
-	});
-});
 /* company profile editing */
 /* basic info edit */
 $('#basic_info_btn').click(function(e){
@@ -44,23 +11,23 @@ $('#basic_info_btn').click(function(e){
 			data: $("#basic_info_form").serialize(),
 			cache: false,
 			//dataType:"json",
-			beforeSend: function(){ $(".show-progress").removeClass('hide');},
-			complete: function(){ $(".show-progress").addClass('hide');}
+			beforeSend: function(){ $(".show-info-progress").removeClass('hide');},
+			complete: function(){ $(".show-info-progress").addClass('hide');}
 		});
 		sentData.done(function(result){
 		var response=JSON.parse(result);
 			if(response.success)
 			{
-				$(".show-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
+				$(".show-info-success").html(response.success).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 				//location.reload();
 			}
 			else
 			{
-			    $(".show-error").html(response.errors).removeClass('hide');
+			    $(".show-info-error").html(response.errors).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 			}
 		}); 
 		sentData.fail(function(jqXHR,textStatus){
-		        $(".show-error").html(textStatus).removeClass('hide');
+		        $(".show-info-error").html(textStatus).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 		});
 		        e.preventDefault();
 		}
@@ -78,23 +45,23 @@ $('#contact_info_btn').click(function(e){
 			data: $("#contact_info_form").serialize(),
 			cache: false,
 			//dataType:"json",
-			beforeSend: function(){ $(".show-progress").removeClass('hide');},
-			complete: function(){ $(".show-progress").addClass('hide');}
+			beforeSend: function(){ $(".show-contact-progress").removeClass('hide');},
+			complete: function(){ $(".show-contact-progress").addClass('hide');}
 		});
 		sentData.done(function(result){
 		var response=JSON.parse(result);
 			if(response.success)
 			{
-				$(".show-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
+				$(".show-contact-success").html(response.success).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 				//location.reload();
 			}
 			else
 			{
-			    $(".show-error").html(response.errors).removeClass('hide');
+			    $(".show-contact-error").html(response.errors).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 			}
 		}); 
 		sentData.fail(function(jqXHR,textStatus){
-		        $(".show-error").html(textStatus).removeClass('hide');
+		        $(".show-contact-error").html(textStatus).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 		});
 		        e.preventDefault();
 		}
@@ -112,23 +79,23 @@ $('#company_profile_btn').click(function(e){
 			data: $("#company_profile_form").serialize(),
 			cache: false,
 			//dataType:"json",
-			beforeSend: function(){ $(".show-progress").removeClass('hide');},
-			complete: function(){ $(".show-progress").addClass('hide');}
+			beforeSend: function(){ $(".show-prof-progress").removeClass('hide');},
+			complete: function(){ $(".show-prof-progress").addClass('hide');}
 		});
 		sentData.done(function(result){
 		var response=JSON.parse(result);
 			if(response.success)
 			{
-				$(".show-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
+				$(".show-prof-success").html(response.success).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 				//location.reload();
 			}
 			else
 			{
-			    $(".show-error").html(response.errors).removeClass('hide');
+			    $(".show-prof-error").html(response.errors).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 			}
 		}); 
 		sentData.fail(function(jqXHR,textStatus){
-		        $(".show-error").html(textStatus).removeClass('hide');
+		        $(".show-prof-error").html(textStatus).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 		});
 		        e.preventDefault();
 		}
@@ -146,23 +113,23 @@ $('#company_address_btn').click(function(e){
 			data: $("#company_address_form").serialize(),
 			cache: false,
 			//dataType:"json",
-			beforeSend: function(){ $(".show-progress").removeClass('hide');},
-			complete: function(){ $(".show-progress").addClass('hide');}
+			beforeSend: function(){ $(".show-addr-progress").removeClass('hide');},
+			complete: function(){ $(".show-addr-progress").addClass('hide');}
 		});
 		sentData.done(function(result){
 		var response=JSON.parse(result);
 			if(response.success)
 			{
-				$(".show-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
+				$(".show-addr-success").html(response.success).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 				//location.reload();
 			}
 			else
 			{
-			    $(".show-error").html(response.errors).removeClass('hide');
+			    $(".show-addr-error").html(response.errors).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 			}
 		}); 
 		sentData.fail(function(jqXHR,textStatus){
-		        $(".show-error").html(textStatus).removeClass('hide');
+		        $(".show-addr-error").html(textStatus).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 		});
 		        e.preventDefault();
 		}
@@ -180,23 +147,23 @@ $('#operation_details_btn').click(function(e){
 			data: $("#operation_details_form").serialize(),
 			cache: false,
 			//dataType:"json",
-			beforeSend: function(){ $(".show-progress").removeClass('hide');},
-			complete: function(){ $(".show-progress").addClass('hide');}
+			beforeSend: function(){ $(".show-w-progress").removeClass('hide');},
+			complete: function(){ $(".show-w-progress").addClass('hide');}
 		});
 		sentData.done(function(result){
 		var response=JSON.parse(result);
 			if(response.success)
 			{
-				$(".show-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
+				$(".show-w-success").html(response.success).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 				//location.reload();
 			}
 			else
 			{
-			    $(".show-error").html(response.errors).removeClass('hide');
+			    $(".show-w-error").html(response.errors).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 			}
 		}); 
 		sentData.fail(function(jqXHR,textStatus){
-		        $(".show-error").html(textStatus).removeClass('hide');
+		        $(".show-w-error").html(textStatus).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 		});
 		        e.preventDefault();
 		}
@@ -230,12 +197,12 @@ $('#operation_details_btn').click(function(e){
             var response=JSON.parse(result);
             if(response.success)
 			{
-				$(".success-status").html(response.success).removeClass('hide').delay(2000).fadeOut();
+				$(".success-status").html(response.success).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 				//location.reload();
 			}
 			else
 			{
-			    $(".error-status").html(response.errors).removeClass('hide').delay(2000).fadeOut();;
+			    $(".error-status").html(response.errors).removeClass('hide').delay(2000).fadeOut().addClass('hide');
 			}
             
       }});
@@ -254,23 +221,23 @@ $('#publish_btn').click(function(e){
 			data: $("#publish_form").serialize(),
 			cache: false,
 			//dataType:"json",
-			beforeSend: function(){ $(".show-progress").removeClass('hide');},
-			complete: function(){ $(".show-progress").addClass('hide');}
+			beforeSend: function(){ $(".show-p-progress").removeClass('hide');},
+			complete: function(){ $(".show-p-progress").addClass('hide');}
 		});
 		sentData.done(function(result){
 		var response=JSON.parse(result);
 			if(response.success)
 			{
-				$(".show-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
+				$(".show-p-success").html(response.success).removeClass('hide').delay(2000).addClass('hide');
 				//location.reload();
 			}
 			else
 			{
-			    $(".show-error").html(response.errors).removeClass('hide');
+			    $(".show-p-error").html(response.errors).removeClass('hide').delay(2000).addClass('hide');
 			}
 		}); 
 		sentData.fail(function(jqXHR,textStatus){
-		        $(".show-error").html(textStatus).removeClass('hide');
+		        $(".show-p-error").html(textStatus).removeClass('hide').delay(2000).addClass('hide');
 		});
 		        e.preventDefault();
 		}
@@ -294,8 +261,8 @@ $("#add-photo-form").ajaxForm({
 		{
 			//var ct= xhr.getResponseHeader("content-type");
 			$(".empty_photos").addClass('hide');
-			$(".show-progress").removeClass('hide').fadeOut();
-			$(".show-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
+			$(".show-u-progress").removeClass('hide').fadeOut();
+			$(".show-u-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
 			$("#container").append('<div class="img-container"><img src="http://localhost/company_directory/assets/images/'+ response.orig_name +'"  class="img-thumbnail" ><br/><span style="cursor:pointer" data-id="<?php echo $photo[&quot;id&quot;]; ?>" id="delete-photo" class="label label-danger">x</span></div>');
 			//console.log(response.orig_name);
 			$(this).clearForm();
@@ -303,13 +270,13 @@ $("#add-photo-form").ajaxForm({
 		}
 		else
 		{
-			$(".show-progress").removeClass('hide').fadeOut();
-			$(".show-error").html(response.errors).removeClass('hide').delay(2000).fadeOut();
+			$(".show-u-progress").removeClass('hide').fadeOut();
+			$(".show-u-error").html(response.errors).removeClass('hide').delay(2000).fadeOut();
 		}
 	},
 	error:function(jqXHR,textStatus)
 	{
-	$(".show-error").html(textStatus).removeClass('hide').delay(2000).fadeOut();
+	$(".show-u-error").html(textStatus).removeClass('hide').delay(2000).fadeOut();
 	}
 
 });
@@ -321,7 +288,7 @@ $('.img-container').on("click","#delete-photo", function(e){
       $(this).parent('div').remove();
       var id=$(this).attr('data-id');
       $.ajax({type:"POST",url:"/company_directory/company/delete_photo",data:{id:id},success:function(result){
-        $('.show-success').html(result);
+        $('.show-u-success').html(result);
       }});
       e.preventDefault();   
     });

@@ -1,14 +1,7 @@
  <!--searchbar-->
-      <div class="jumbotron">
-        <div id="infoMessage"></div>
-        <h1>Company Logo</h1>
-      </div>
-<!--end searchbar-->
-<!--categories-->
-      <div class="row marketing">
-        <div class="search-bar">
-          
-            <?php echo form_open(base_url('pages/search'),array('class' =>'form-inline')); ?>
+  <div class="row marketing">
+        <div class="search-bar">    
+            <?php echo form_open(base_url('/pages/search'),array('class' =>'form-inline')); ?>
               <div class="form-group">
                 <div class="input-group">
                   <?php echo form_input(array('name' => 'q','size'=>'45','class'=>'form-control input-lg','id' => 'search-box', 'value' => $search_terms)); ?>
@@ -41,19 +34,43 @@
                   </select>
                 </div>
               </div>
-              
-              <?php echo form_close(); ?>   
+              <?php echo form_close(); ?>
         </div>
       </div>
-        
-      <div class="row marketing search-categories ">
-        <div class="row">
-          <div class="col-md-10">
-          
+      <!--end searchbar-->
+
+        <div class="row marketing search-categories ">
+          <div class="row">
+            <div class="col-md-10">
+              <?php if ( ! is_null($results)): ?>
+                <?php if (count($results)): ?>
+                   <hr/>
+                  <p>Showing search results for '<?php echo $search_terms; ?>' (<?php echo $first_result; ?>&ndash;<?php echo $last_result; ?> of <?php echo $total_results; ?>):</p>
+                   <hr/>
+                  
+                  <ul class="list-unstyled">
+                  <?php foreach ($results as $result): ?>
+                    <li><?php if($result->c_logo == null){  ?><img src="/company_directory/assets/images/logos/logo-holder.png" alt="..." style="width:80px;" class="img-rounded"><?php }else{ ?><img src="/company_directory/assets/images/logos/<?php echo $result->c_logo; ?>" alt="..." style="width:80px;" class="img-rounded"> <?php } ?> <a href="<?php echo base_url('/pages/template/$result->c_name'); ?>"><?php echo search_highlight($result->c_name, $search_terms); ?></a>    <a style="cursor:pointer" data-id="<?php echo $result->id; ?>" target="_blank" href="<?php echo base_url(); ?>posts/<?php echo url_title($result->c_name,'-',true); ?>" class="badger label label-danger">Preview</a><br /><?php echo search_extract($result->c_prof, $search_terms); ?></li>
+                  <?php endforeach ?>
+                  </ul>
+                  <hr/>
+                  
+                  <?php echo $this->pagination->create_links(); ?>
+                  
+                <?php else: ?>
+                  <p><em>There are no results for your query.</em></p>
+                <?php endif ?>
+              <?php endif ?>
+
+              <?php if (isset($search_time)): ?>
+                <p>Search time: <?php echo $search_time; ?></p>
+              <?php endif ?>
+
+
+            </div>
           </div>
         </div>
       </div>
-     
   <!--end categories-->
   <!--template modules-->
   <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

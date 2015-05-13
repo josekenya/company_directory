@@ -7,6 +7,22 @@ class Pages extends CI_Controller
 		parent::_construct();
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 	}
+	function index($search_terms = '', $start = 0)
+	{
+		if(!$this->ion_auth->logged_in())
+		{
+			$data= array(
+        	'page_title'=>'Search Company',
+            'search_terms' => $search_terms,
+            'first_result' => @$first_result,
+            'last_result' => @$last_result,
+            'total_results' => @$total_results,
+            'results' => @$results
+             );
+		    $this->template->load('home', 'pages/search_home_v', $data);
+		}
+	}
+	
 	function search($search_terms = '', $start = 0)
 	{
 		if (!$this->ion_auth->logged_in())
@@ -14,9 +30,15 @@ class Pages extends CI_Controller
 			// If the form has been submitted, rewrite the URL so that the search
         // terms can be passed as a parameter to the action. Note that there
         // are some issues with certain characters here.
-        if ($this->input->post('q'))
+		/*
+		if (empty($this->input->post('q')))
         {
-            redirect('/pages/search/' . $this->input->post('q'));
+            redirect('/' . $this->input->post('q'));
+        }
+        */	
+        if($this->input->post('q'))
+        {
+            redirect('/search/' . $this->input->post('q'));
         }
  
         if ($search_terms)
@@ -31,7 +53,7 @@ class Pages extends CI_Controller
             $total_results = $this->company_m->count_search_results($search_terms);
  
             // Call a method to setup pagination
-            $this->_setup_pagination('/pages/search/' . $search_terms . '/', $total_results, $results_per_page);
+            $this->_setup_pagination('/search/' . $search_terms . '/', $total_results, $results_per_page);
  
             // Work out which results are being displayed
             $first_result = $start + 1;
@@ -47,13 +69,14 @@ class Pages extends CI_Controller
             'total_results' => @$total_results,
             'results' => @$results
         );
-        $this->template->load('home', 'pages/search_home_v', $data);
+        $this->template->load('home', 'pages/search_results_v', $data);
 
         
 		}
 		//$data=array('page_title'=>'Search here');
 		//$this->template->load('home', 'pages/search_home_v', $data);
 	}
+	
 	function login()
 	{
 		//validate form input

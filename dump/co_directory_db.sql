@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2015 at 03:48 PM
+-- Generation Time: May 13, 2015 at 05:53 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `company_information` (
 `id` int(11) NOT NULL,
   `c_name` text NOT NULL,
+  `uri` varchar(255) NOT NULL,
   `c_ind_cat` varchar(200) NOT NULL,
   `c_logo` varchar(200) DEFAULT NULL,
   `c_prof` text NOT NULL,
@@ -48,20 +49,21 @@ CREATE TABLE IF NOT EXISTS `company_information` (
   `c_we_opening` varchar(200) NOT NULL,
   `c_we_closing` varchar(200) NOT NULL,
   `c_template` varchar(200) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `company_information`
 --
 
-INSERT INTO `company_information` (`id`, `c_name`, `c_ind_cat`, `c_logo`, `c_prof`, `c_owner_id`, `c_mobile`, `c_tel`, `c_email`, `c_address_1`, `c_address_2`, `c_city`, `c_country`, `c_zip`, `c_state`, `c_emp_no`, `c_w_opening`, `c_w_closing`, `c_we_opening`, `c_we_closing`, `c_template`) VALUES
-(1, 'Zinduka Ltd', 'hosp', NULL, 'Zinduka is great co                                                                                    ', 5, '713467898', '21344800', 'zinduka@gmail.com', 'random', '', 'Nairobi', 'Kenya', 2100, '', 0, '', '', '', '', 'basic'),
-(2, 'Company Z', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
-(3, 'My Company Ltd', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
-(4, 'Eazy Ltd', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
-(5, 'Gregory Limited', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
-(6, 'Kazoon Ld', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
-(7, 'Kappa Ltd', '', NULL, '', 5, '0', '0', '', '', '', '', '', 0, '', 0, '', '', '', '', '');
+INSERT INTO `company_information` (`id`, `c_name`, `uri`, `c_ind_cat`, `c_logo`, `c_prof`, `c_owner_id`, `c_mobile`, `c_tel`, `c_email`, `c_address_1`, `c_address_2`, `c_city`, `c_country`, `c_zip`, `c_state`, `c_emp_no`, `c_w_opening`, `c_w_closing`, `c_we_opening`, `c_we_closing`, `c_template`) VALUES
+(13, 'Jasr ltd', 'jasr-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(14, 'Pare Ltd', 'pare-ltd', 'ent', NULL, '                                            <p>Pare was established in 1923 as part of a chain of small scale businesses.</p>\r\n                                        ', 5, '0723456865', '0278346784', 'pare@gmails.com', 'random', '', 'Nairobi', 'Kenya', 0, '', 0, '', '', '', '', 'basic'),
+(15, 'zari ltd', 'zari-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(16, 'Pore ltd', 'pore-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(17, 'Koza Ltd', 'koza-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(18, 'Hoof Ltd', 'hoof-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(19, 'Pazo ltd', 'pazo-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(20, 'Kafo ltd', 'kafo-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -191,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
 (1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, 'MOWpMUUZJ1icFXHn/2n0PO', 1268889823, 1430067888, 1, 'Admin', 'istrator', 'ADMIN', '0'),
-(5, '::1', 'joseph mboya', '$2y$08$Tt0H2sN83byWbl4f/4Hj5eOCqn1xWkkvjwOAKUfJIJm3Q6DkGmE/m', NULL, 'josephmboya6@gmail.com', NULL, NULL, NULL, 'XObfRcRi.iNdzwL1z4X5je', 1430042890, 1431167179, 1, 'joseph', 'mboya', NULL, '0715053212'),
+(5, '::1', 'joseph mboya', '$2y$08$Tt0H2sN83byWbl4f/4Hj5eOCqn1xWkkvjwOAKUfJIJm3Q6DkGmE/m', NULL, 'josephmboya6@gmail.com', NULL, NULL, NULL, 'MEw.O0ZP3m.9CutCkt3I6e', 1430042890, 1431527383, 1, 'joseph', 'wambua', NULL, '0715053212'),
 (6, '::1', 'kelvin king', '$2y$08$UmpTlkKNUCIjaLH8nbxSheTlgD/jb9zDJRKfN3955yoS.vLQUJWme', NULL, 'kelvin@gmail.com', NULL, NULL, NULL, NULL, 1430043517, NULL, 1, 'kelvin', 'king', NULL, '07234566772'),
 (7, '::1', 'mark masa', '$2y$08$Lsvow7vQtjZRQngin4X5gOKgx.G8cuc1QpCi7ILrWiBLuX0Yz7PsK', NULL, 'masa@gmail.com', NULL, NULL, NULL, NULL, 1430938998, NULL, 1, 'Mark', 'Masa', NULL, '0765212234');
 
@@ -226,7 +228,7 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 -- Indexes for table `company_information`
 --
 ALTER TABLE `company_information`
- ADD PRIMARY KEY (`id`), ADD FULLTEXT KEY `c_name` (`c_name`,`c_ind_cat`,`c_prof`,`c_address_1`,`c_address_2`,`c_city`,`c_country`,`c_state`), ADD FULLTEXT KEY `c_prof` (`c_prof`), ADD FULLTEXT KEY `c_name_2` (`c_name`), ADD FULLTEXT KEY `c_name_3` (`c_name`);
+ ADD PRIMARY KEY (`id`), ADD FULLTEXT KEY `c_prof` (`c_prof`), ADD FULLTEXT KEY `c_name` (`c_name`);
 
 --
 -- Indexes for table `company_photos`
@@ -278,7 +280,7 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `company_information`
 --
 ALTER TABLE `company_information`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `company_photos`
 --

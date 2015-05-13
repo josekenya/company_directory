@@ -11,11 +11,10 @@ class Company extends CI_Controller
 		if(!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
-			redirect('pages/search', 'refresh');
+			redirect('/', 'refresh');
 		}
 		else
 		{
-			//redirect them to the login page
 			$id=$this->uri->segment(2);
 			$data['photos']=$this->company_m->get_photos($id);
 			$data['services']=$this->company_m->get_services($id);
@@ -235,6 +234,6 @@ class Company extends CI_Controller
 		$logout = $this->ion_auth->logout();
 		//redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('search', 'refresh');
+		redirect('/', 'refresh');
 	}
 }

@@ -78,9 +78,9 @@
                                         <button type="reset" class="btn btn-default btn-sm">Reset</button>
                                         </div>
                                         </div>
-                                        <div class="show-progress hide">Saving....</div>    
-                                        <div class="show-error alert alert-danger hide"></div>
-                                        <div class="show-success alert alert-success hide"></div>
+                                        <div class="show-info-progress hide">Saving....</div>    
+                                        <div class="show-info-error alert alert-danger hide"></div>
+                                        <div class="show-info-success alert alert-success hide"></div>
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="contact_info">
@@ -113,9 +113,9 @@
                                         </div>
                                         </div>
 
-                                        <div class="show-progress hide">Saving....</div>    
-                                        <div class="show-error alert alert-danger hide"></div>
-                                        <div class="show-success alert alert-success hide"></div>
+                                        <div class="show-contact-progress hide">Saving....</div>    
+                                        <div class="show-contact-error alert alert-danger hide"></div>
+                                        <div class="show-contact-success alert alert-success hide"></div>
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="company_profile">
@@ -138,9 +138,9 @@
                                         </div>
                                         </div>
 
-                                        <div class="show-progress hide">Saving....</div>    
-                                        <div class="show-error alert alert-danger hide"></div>
-                                        <div class="show-success alert alert-success hide"></div>
+                                        <div class="show-prof-progress hide">Saving....</div>    
+                                        <div class="show-prof-error alert alert-danger hide"></div>
+                                        <div class="show-prof-success alert alert-success hide"></div>
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="company_address">
@@ -186,9 +186,9 @@
                                         </div>
                                         </div>
 
-                                        <div class="show-progress hide">Saving....</div>    
-                                        <div class="show-error alert alert-danger hide"></div>
-                                        <div class="show-success alert alert-success hide"></div>
+                                        <div class="show-addr-progress hide">Saving....</div>    
+                                        <div class="show-addr-error alert alert-danger hide"></div>
+                                        <div class="show-addr-success alert alert-success hide"></div>
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="operation_details">
@@ -242,9 +242,9 @@
                                         </div>
                                         </div>
 
-                                        <div class="show-progress hide">Saving....</div>    
-                                        <div class="show-error alert alert-danger hide"></div>
-                                        <div class="show-success alert alert-success hide"></div>
+                                        <div class="show-w-progress hide">Saving....</div>    
+                                        <div class="show-w-error alert alert-danger hide"></div>
+                                        <div class="show-w-success alert alert-success hide"></div>
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="services">
@@ -286,9 +286,9 @@
                                             </div>
                                             <button type="submit" class="btn btn-primary">Upload</button>
                                         </form>
-                                         <div class="show-progress hide">Uploading....</div>    
-                                        <div class="show-error alert alert-danger hide"></div>
-                                        <div class="show-success alert alert-success hide"></div>
+                                         <div class="show-u-progress hide">Uploading....</div>    
+                                        <div class="show-u-error alert alert-danger hide"></div>
+                                        <div class="show-u-success alert alert-success hide"></div>
                                     </div>
                                    </div>
                                    <br/>
@@ -344,9 +344,9 @@
                                         </div>
                                         </div>
 
-                                        <div class="show-progress hide">Saving....</div>    
-                                        <div class="show-error alert alert-danger hide"></div>
-                                        <div class="show-success alert alert-success hide"></div>
+                                        <div class="show-p-progress hide">Saving....</div>    
+                                        <div class="show-p-error alert alert-danger hide"></div>
+                                        <div class="show-p-success alert alert-success hide"></div>
                                     </form>
                                 </div>
                             </div>

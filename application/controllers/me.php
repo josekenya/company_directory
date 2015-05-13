@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class Me extends CI_Controller
 {
-	function _construct()
+	function _construct($config)
 	{
 		parent::_construct();
 		
@@ -34,9 +34,16 @@ class Me extends CI_Controller
 		 }	
 		 else
 		 {
-		  $this->company_m->add_company();
-		  $data['success']="Company Created!";
-		  echo json_encode($data);
+		 if($this->company_m->add_company())
+		 {
+             $data['success']="Company Created!";
+		     echo json_encode($data);
+		 }
+		 else
+		 {
+              $data['errors']="Company Already Exists";
+		      echo json_encode($data);
+		 }	 
 		 }
 	}
 	function delete_company()
@@ -125,6 +132,6 @@ class Me extends CI_Controller
 		$logout = $this->ion_auth->logout();
 		//redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('pages/search', 'refresh');
+		redirect('/', 'refresh');
 	}
 }

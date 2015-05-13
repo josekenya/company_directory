@@ -70,40 +70,7 @@
     <script src="<?php echo base_url();?>assets/js/home.js"></script>
     <script>
     $(function(){
-      /*
-      $('body').on('click','.badger',function(e){
-        var c_id=$(this).attr('data-id');
-        $.ajax({type:"POST",
-          url:"/company_directory/pages/company_info",
-          dataType:"json",
-          cache:false,
-          data:{id:c_id},
-          success:function(result)
-          {
-            var i= result.info;
-            console.log(i.c_name);
-            (i.company_logo==null)?$("body").find("#logo-img").attr('src','/company_directory/assets/images/logos/logo-holder.png'):$("body").find("#logo-img").attr('src','/company_directory/assets/images/logos/'+i.c_logo);
-            $("#co-name").html(i.c_name);
-            $("#co-id").attr('value',i.id);
-            $(".profile").html(i.c_prof);
-            $(".opening").html(i.c_w_opening);
-            $(".closing").html(i.c_w_closing);
-            $(".w-opening").html(i.c_we_opening);
-            $(".w-closing").html(i.c_we_closing);
-            $(".street").html(i.c_address_1);
-            $(".city").html(i.c_city);
-            $(".country").html(i.c_country);
-            $(".zip").html(i.c_zip);
-            $(".mobile").html(i.c_mobile);
-            $(".tel").html(i.c_tel);
-            $(".email").html(i.c_email);
-
-            $('#basic').modal('show');
-          }
-          });
-           e.preventDefault();
-      });
-*/
+      
  /*send message  */
   $('#message_btn').click(function(e){
       $('#message_form').validate({

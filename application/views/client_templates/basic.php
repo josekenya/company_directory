@@ -1,73 +1,26 @@
- <!--searchbar-->
-      <div class="jumbotron">
-        <div id="infoMessage"></div>
-        <h1>Company Logo</h1>
-      </div>
-<!--end searchbar-->
 <!--categories-->
       <div class="row marketing">
-        <div class="search-bar">
-          
-            <?php echo form_open(base_url('pages/search'),array('class' =>'form-inline')); ?>
-              <div class="form-group">
-                <div class="input-group">
-                  <?php echo form_input(array('name' => 'q','size'=>'45','class'=>'form-control input-lg','id' => 'search-box', 'value' => $search_terms)); ?>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary btn-lg">Go</button>
-              <br/>
-              <p>Advance Search</p>
-              <label>Category</label>
-              <div class="form-group">
-                <div class="input-group">
-                 <select class="form-control" name="ct" cols="30">
-                    <option>Any</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                 </select>
-                </div>
-              </div>
-              <label>City</label>
-              <div class="form-group">
-                <div class="input-group">
-                  <select class="form-control" name="cy" cols="30">
-                    <option>Any</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-              </div>
-              
-              <?php echo form_close(); ?>   
-        </div>
-      </div>
-        
-      <div class="row marketing search-categories ">
         <div class="row">
-          <div class="col-md-10">
-          
+          <div class="col-md-12">
+            <?php 
+            if($client['c_logo'] == null)
+            {
+            ?>
+            <img src="<?php echo base_url()?>assets/images/logos/logo-holder.png" style="display:inline-block; width:100px; " alt="..." id="logo-img" class="img-rounded">
+            <?php  
+            }else{
+            ?>
+            <img src="<?php echo base_url()?>assets/images/logos/<?php echo $client['c_logo']; ?>" style="display:inline-block; width:100px; " alt="..." id="logo-img" class="img-rounded">
+            <?php
+            }
+            ?>
+              
+              <h4 class="modal-title" style="display:inline-block; margin-left:30px;" id="co-name"><?php echo $client['c_name']; ?></h4>
           </div>
         </div>
-      </div>
-     
-  <!--end categories-->
-  <!--template modules-->
-  <div class="modal fade" id="basic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <img src="" style="display:inline-block; width:100px; " alt="..." id="logo-img" class="img-rounded">
-              <h4 class="modal-title" style="display:inline-block; margin-left:30px;" id="co-name"></h4>
-            </div>
-            <div class="modal-body">
-              <div class="container-fluid">
-              <!--slider-->
-              <div class="row">
+        <br/>
+        <br/>
+        <div class="row">
                 <div class="col-md-12">
         
                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -114,14 +67,26 @@
                 <!--about-->
                 <div class="col-md-8">
                   <h4>About</h4>
-                  <div class="profile"></div>
+                  <div class="profile">
+                    <?php 
+
+                       if($client['c_prof'] == null)
+                          {
+                          ?>
+                         <p>No Content</p>
+                          <?php  
+                          }else{
+                          
+                          }
+                     ?>
+                  </div>
                 </div>
                 <!--details-->
                 <div class="col-md-4">
                   <h4> Business Hours </h4>
-                  <label>Weekdays</label> : <label class="opening"> </label> to <label class="closing"> </label>
+                  <label>Weekdays</label> : <label class="opening"><?php echo $client['c_w_opening']; ?> </label> to <label class="closing"><?php echo $client['c_w_closing']; ?> </label>
                   <br/>
-                  <label>Weekends</label> : <label class="w-opening"></label> to <label class="w-closing"></label>
+                  <label>Weekends</label> :<?php echo $client['c_we_opening']; ?> <label class="w-opening"></label> to <label class="w-closing"><?php echo $client['c_we_closing']; ?></label>
                 </div>
               </div>
               <br/>
@@ -129,11 +94,11 @@
               <div class="row">
                 <div class="col-md-3">
                   <address>
-                    <label class="street" ></label><br>
-                    <label class="city"></label>,<label class="country"></label> <label class="zip"><br>
-                    <abbr title="Phone">M:</abbr> <label class="mobile"></label></br>
-                    <abbr title="Phone">T:</abbr> <label class="tel"></label> </br>
-                    <a href="mailto:#"> <label class="email"></label></a>
+                    <label class="street" ><?php echo $client['c_address_1']; ?></label><br>
+                    <label class="city"><?php echo $client['c_city']; ?></label>,<label class="country"><?php echo $client['c_country']; ?></label> <label class="zip"><?php echo $client['c_zip']; ?><br>
+                    <abbr title="Phone">M:</abbr> <label class="mobile"><?php echo $client['c_mobile']; ?></label></br>
+                    <abbr title="Phone">T:</abbr> <label class="tel"><?php echo $client['c_tel']; ?></label> </br>
+                    <a href="mailto:#"> <label class="email"><?php echo $client['c_email']; ?></label></a>
                   </address>
                 </div>
                 <div class="col-md-9">
@@ -143,7 +108,7 @@
                     
                             <div class="col-sm-offset-3 col-sm-9">
                                 <input type="email" class="form-control" name="email" id="email" placeholder="your email" required>
-                                <input type="hidden" class="form-control" id="co-id" name="co-id" >
+                                <input type="hidden" class="form-control" id="co-id" name="co-id" value="<?php echo $client['id']; ?>" >
                             </div>
                         </div>
                         <div class="form-group">
@@ -167,14 +132,19 @@
                 </div>
               </div>
             </div>
-             
-            </div>
-            <div class="modal-footer">
-            </div>
+        
+      </div>
+        
+      <div class="row marketing search-categories ">
+        <div class="row">
+          <div class="col-md-10">
+          
           </div>
         </div>
-    </div>
-
+      </div>
+     
+  <!--end categories-->
+  
    <!--login modal-->
     <div class="modal fade" id="myLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

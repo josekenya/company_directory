@@ -1,6 +1,7 @@
 <?php
 class Company_m extends CI_Model
 {
+	
     function get_companies($id)
 	{
 	     $query=$this->db->get_where('company_information',array('c_owner_id'=>$id));
@@ -130,6 +131,25 @@ class Company_m extends CI_Model
 	    }
 
 	}
+	function client_company($slug)
+	{
+		$this->db->select('*');
+		$this->db->from('company_information');
+		$this->db->where('uri',$slug);
+		$query=$this->db->get();
+		if($this->db->affected_rows($query))
+		{
+           $results=$query->result_array();
+	       foreach ($results as $result) {
+	         $rows=$result;
+	       }
+	       return $rows;
+		}
+		else
+	    {
+	    	return false;
+	    }
+	}
 	function company_count($id)
 	{
 		$this->db->where('c_owner_id',$id);
@@ -155,16 +175,17 @@ class Company_m extends CI_Model
 	}
 	function add_company()
 	{
-	      $company=array('c_name'=>$this->input->post('company-name'),
-	      	             'c_owner_id'=>$this->input->post('owner-id'));
-	      $query=$this->db->insert('company_information',$company);
+	      $data=array('c_name'=>$this->input->post('company-name'),
+	      	             'c_owner_id'=>$this->input->post('owner-id'),
+	      	              'uri'=>url_title($this->input->post('company-name'),'-',true));
+	      $query=$this->db->insert('company_information',$data);
 	      if($this->db->affected_rows($query)==1)
 	      {
 	          return true;
 	      }
 	      else
 	      {
-	      	return false;
+	      	  return false;
 	      }
 	}
 	function delete_company($id)
@@ -334,7 +355,7 @@ class Company_m extends CI_Model
         // Execute our SQL statement and return the result
         $sql = "SELECT *
                     FROM company_information
-                    WHERE MATCH (c_prof) AGAINST (?) > 0
+                    WHERE MATCH (c_name) AGAINST (?) > 0
                     $limit";
         $query = $this->db->query($sql, array($terms, $terms));
         return $query->result();
@@ -345,7 +366,7 @@ class Company_m extends CI_Model
         // Run SQL to count the total number of search results
         $sql = "SELECT COUNT(*) AS count
                     FROM company_information
-                    WHERE MATCH (c_prof) AGAINST (?)";
+                    WHERE MATCH (c_name) AGAINST (?)";
         $query = $this->db->query($sql, array($terms));
         return $query->row()->count;
     }
