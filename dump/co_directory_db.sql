@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2015 at 05:53 PM
+-- Generation Time: May 15, 2015 at 07:57 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `company_information` (
 --
 
 INSERT INTO `company_information` (`id`, `c_name`, `uri`, `c_ind_cat`, `c_logo`, `c_prof`, `c_owner_id`, `c_mobile`, `c_tel`, `c_email`, `c_address_1`, `c_address_2`, `c_city`, `c_country`, `c_zip`, `c_state`, `c_emp_no`, `c_w_opening`, `c_w_closing`, `c_we_opening`, `c_we_closing`, `c_template`) VALUES
-(13, 'Jasr ltd', 'jasr-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
+(13, 'Jasr Ltd', 'jasr-ltd', 'technology', 'YRztgX2S2.jpeg', '<p>Jasr Ltd Company is a great thing</p>\r\n', 5, '', '', '', 'random', '', 'kisumu', 'kenya', 20134, '', 0, '', '', '', '', 'basic'),
 (14, 'Pare Ltd', 'pare-ltd', 'ent', NULL, '                                            <p>Pare was established in 1923 as part of a chain of small scale businesses.</p>\r\n                                        ', 5, '0723456865', '0278346784', 'pare@gmails.com', 'random', '', 'Nairobi', 'Kenya', 0, '', 0, '', '', '', '', 'basic'),
 (15, 'zari ltd', 'zari-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
 (16, 'Pore ltd', 'pore-ltd', '', NULL, '', 5, '', '', '', '', '', '', '', 0, '', 0, '', '', '', '', ''),
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
 (1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, 'MOWpMUUZJ1icFXHn/2n0PO', 1268889823, 1430067888, 1, 'Admin', 'istrator', 'ADMIN', '0'),
-(5, '::1', 'joseph mboya', '$2y$08$Tt0H2sN83byWbl4f/4Hj5eOCqn1xWkkvjwOAKUfJIJm3Q6DkGmE/m', NULL, 'josephmboya6@gmail.com', NULL, NULL, NULL, 'MEw.O0ZP3m.9CutCkt3I6e', 1430042890, 1431527383, 1, 'joseph', 'wambua', NULL, '0715053212'),
+(5, '::1', 'joseph mboya', '$2y$08$Tt0H2sN83byWbl4f/4Hj5eOCqn1xWkkvjwOAKUfJIJm3Q6DkGmE/m', NULL, 'josephmboya6@gmail.com', NULL, NULL, NULL, 'mPN/ZemIpA07dCwerV6n9e', 1430042890, 1431693206, 1, 'joseph', 'wambua', NULL, '0715053212'),
 (6, '::1', 'kelvin king', '$2y$08$UmpTlkKNUCIjaLH8nbxSheTlgD/jb9zDJRKfN3955yoS.vLQUJWme', NULL, 'kelvin@gmail.com', NULL, NULL, NULL, NULL, 1430043517, NULL, 1, 'kelvin', 'king', NULL, '07234566772'),
 (7, '::1', 'mark masa', '$2y$08$Lsvow7vQtjZRQngin4X5gOKgx.G8cuc1QpCi7ILrWiBLuX0Yz7PsK', NULL, 'masa@gmail.com', NULL, NULL, NULL, NULL, 1430938998, NULL, 1, 'Mark', 'Masa', NULL, '0765212234');
 
@@ -228,7 +228,7 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 -- Indexes for table `company_information`
 --
 ALTER TABLE `company_information`
- ADD PRIMARY KEY (`id`), ADD FULLTEXT KEY `c_prof` (`c_prof`), ADD FULLTEXT KEY `c_name` (`c_name`);
+ ADD PRIMARY KEY (`id`), ADD FULLTEXT KEY `c_prof` (`c_prof`), ADD FULLTEXT KEY `c_name` (`c_name`), ADD FULLTEXT KEY `c_ind_cat` (`c_ind_cat`), ADD FULLTEXT KEY `c_city` (`c_city`);
 
 --
 -- Indexes for table `company_photos`

@@ -7,10 +7,19 @@ class Pages extends CI_Controller
 		parent::_construct();
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 	}
-	function index($search_terms = '', $start = 0)
+	function index($search_terms = '',$categories = '',$cities = '',$start = 0)
 	{
 		if(!$this->ion_auth->logged_in())
 		{
+            $data['page_title'] = 'Search Company';
+	        $data['search_terms'] = $search_terms;
+	        $data['categories'] = $categories;
+	        $data['cities'] = $cities;
+	        $data['first_result'] = @$first_result;
+	        $data['last_result'] = @$last_result;
+	        $data['total_results'] = @$total_results;
+	        $data['results'] = @$results;
+            /*
 			$data= array(
         	'page_title'=>'Search Company',
             'search_terms' => $search_terms,
@@ -19,11 +28,13 @@ class Pages extends CI_Controller
             'total_results' => @$total_results,
             'results' => @$results
              );
+             */
+
 		    $this->template->load('home', 'pages/search_home_v', $data);
 		}
 	}
 	
-	function search($search_terms = '', $start = 0)
+	function search($search_terms = '',$categories= '',$cities= '', $start = 0)
 	{
 		if (!$this->ion_auth->logged_in())
 		{
@@ -36,12 +47,12 @@ class Pages extends CI_Controller
             redirect('/' . $this->input->post('q'));
         }
         */	
-        if($this->input->post('q'))
+        if($this->input->post('q') || $this->input->post('ct') || $this->input->post('cy')  )
         {
-            redirect('/search/' . $this->input->post('q'));
+            redirect('/search/' . $this->input->post('q') .'/'.$this->input->post('ct').'/'.$this->input->post('cy'));
         }
  
-        if ($search_terms)
+        if ($search_terms || $categories || $cities)
         {
             // Determine the number of results to display per page
             $results_per_page = $this->config->item('results_per_page');
@@ -49,8 +60,8 @@ class Pages extends CI_Controller
             // Load the model, perform the search and establish the total
             // number of results
             //$this->load->model('page_model');
-            $results = $this->company_m->search($search_terms, $start, $results_per_page);
-            $total_results = $this->company_m->count_search_results($search_terms);
+            $results = $this->company_m->search($search_terms, $categories,$cities, $start, $results_per_page);
+            $total_results = $this->company_m->count_search_results($search_terms,$categories,$cities);
  
             // Call a method to setup pagination
             $this->_setup_pagination('/search/' . $search_terms . '/', $total_results, $results_per_page);
@@ -61,14 +72,26 @@ class Pages extends CI_Controller
         }
  
         // Render the view, passing it the necessary data
+        $data['page_title'] = 'Search Company';
+        $data['search_terms'] = $search_terms;
+        $data['categories'] = $categories;
+        $data['cities'] = $cities;
+        $data['first_result'] = @$first_result;
+        $data['last_result'] = @$last_result;
+        $data['total_results'] = @$total_results;
+        $data['results'] = @$results;
+        /*
         $data= array(
         	'page_title'=>'Search Company',
             'search_terms' => $search_terms,
+            'categories' => @$categories,
+            'cities' => @$cities,
             'first_result' => @$first_result,
             'last_result' => @$last_result,
             'total_results' => @$total_results,
             'results' => @$results
         );
+        */
         $this->template->load('home', 'pages/search_results_v', $data);
 
         

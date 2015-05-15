@@ -1,5 +1,50 @@
 $(function(){
 /* company profile editing */
+/* upload logo */
+$("#add-logo-form").ajaxForm({
+	
+	beforeSubmit:function(formData,jqForm,options)
+	{
+		var queryString = $.param(formData);
+		$("#loader").removeClass('hide');
+		$("#logo").addClass('hide');
+		//return true;
+	},
+	success:function(responseText,statusText,xhr)
+	{
+	var response=JSON.parse(responseText);
+		if(response.success)
+		{
+			$("#loader").addClass('hide');
+			location.reload();
+			$("#logo").removeClass('hide');
+			$(this).clearForm();
+		
+		}
+		else
+		{
+			$("#loader").addClass('hide');
+			$("#load-error").html(response.errors).removeClass('hide').delay(2000).addClass('hide');
+		}
+	},
+	error:function(jqXHR,textStatus)
+	{
+	$("#loader").addClass('hide');
+	$(".load-error").html(textStatus).removeClass('hide').delay(2000).addClass('hide');
+	}
+
+});
+/*delete photo */
+$('.logo-img-container').on("click","#delete-logo", function(e){
+     //user click on remove text
+      $(this).parent('div').remove();
+      var id=$(this).attr('data-id');
+      $.ajax({type:"POST",url:"/company_directory/company/delete_logo",data:{id:id},success:function(result){
+        location.reload();
+      }});
+      e.preventDefault();   
+    });
+
 /* basic info edit */
 $('#basic_info_btn').click(function(e){
 	$('#basic_info_form').validate({

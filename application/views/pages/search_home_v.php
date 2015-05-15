@@ -21,11 +21,16 @@
               <div class="form-group">
                 <div class="input-group">
                  <select class="form-control" name="ct" cols="30">
-                    <option>Any</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option value=""></option>
+                    <option value="food" <?php echo (!empty($categories)=="food")? "selected" :" "; ?>>Food and Processing</option>
+                    <option value="manufacture" <?php echo (!empty($categories)=="manufacture")? "selected" :" "; ?>>Manufacturing</option>
+                    <option value="entertainment" <?php echo (!empty($categories)=="entertainment")? "selected" :" "; ?>>Entertainment</option>
+                    <option value="technology" <?php echo (!empty($categories)=="technology")? "selected" :" "; ?>>Technology</option>
+                    <option value="construction" <?php echo (!empty($categories)=="construction")? "selected" :" "; ?>>Building and Construction</option>
+                    <option value="tourism" <?php echo (!empty($categories)=="tourism")? "selected" :" "; ?>>Tourism</option>
+                    <option value="hospitality" <?php echo (!empty($categories)=="hospitality")? "selected" :" "; ?>>Hospitality & Catering</option>
+                    <option value="law" <?php echo (!empty($categories)=="law")? "selected" :" "; ?>>Law</option>
+                    <option value="agriculture" <?php echo (!empty($categories)=="agriculture")? "selected" :" "; ?>>Agriculture</option>
                  </select>
                 </div>
               </div>
@@ -33,11 +38,14 @@
               <div class="form-group">
                 <div class="input-group">
                   <select class="form-control" name="cy" cols="30">
-                    <option>Any</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option value=""></option>
+                    <option value="nairobi" <?php echo (!empty($cities)=="nairobi")? "selected" :" "; ?>>Nairobi</option>
+                    <option value="kisumu" <?php echo (!empty($cities)=="kisumu")? "selected" :" "; ?>>Kisumu</option>
+                    <option value="mombasa" <?php echo (!empty($cities)=="mombasa")? "selected" :" "; ?>>Mombasa</option>
+                    <option value="eldoret" <?php echo (!empty($cities)=="eldoret")? "selected" :" "; ?>>Eldoret</option>
+                    <option value="nyeri" <?php echo (!empty($cities)=="nyeri")? "selected" :" "; ?>>Nyeri</option>
+                    <option value="embu" <?php echo (!empty($cities)=="embu")? "selected" :" "; ?>>Embu</option>
+                    <option value="machakos" <?php echo (!empty($cities)=="machakos")? "selected" :" "; ?>>Machakos</option>
                   </select>
                 </div>
               </div>

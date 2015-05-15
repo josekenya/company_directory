@@ -46,6 +46,31 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="home">
                                     <h4> </h4>
+                                    <div class="row">
+                                        <h4 class="text-center">Upload Logo</h4>
+                                        <div class="col-sm-3"></div>
+                                        <div class=" col-sm-4"> 
+                                            <span id="load-error" class="hide"></span> 
+                                            <form class="form-inline" id="add-logo-form" method="post" action="<?php echo base_url('company/add_logo'); ?>" enctype="multipart/form-data">
+                                                <div class="form-group">
+                                                    <input  class="form-control" id="upload-logo" type="file" name="upload-logo">
+                                                    <input type="hidden" name="company-id" value="<?php echo $company['id']; ?>">
+                                                </div>
+                                                <br/><br/>
+                                                <button type="submit" class="btn btn-primary">Upload</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="logo-img-container">
+                                             <img src="<?php echo base_url(); ?>assets/images/logos/loader.gif" alt="Upload Logo" id="loader" class="img-thumbnail hide" width="40">
+                                             <img src="<?php echo base_url(); ?>assets/images/logos/<?php echo ($company['c_logo']==null)?'logo-holder.png':$company['c_logo']; ?>" alt="Upload Logo" id="logo" class="img-thumbnail" width="80">
+                                              <br/>
+                                             <span style="cursor:pointer" data-id="<?php echo $company['id']; ?>" id="delete-logo" class="label hide label-danger">x</span>
+                                            </div> 
+                                        </div>
+
+                                    </div>
+                                    <br/><br/>
                                     <form class="form-horizontal" id="basic_info_form"  role="form">
                                         <div class="form-group">
                                         <label for="co-name" class="col-sm-3 control-label">Company Name</label>
@@ -59,11 +84,11 @@
                                         <select class="form-control" name="industry-category">
                                           <option value="food" <?php echo ($company['c_ind_cat']=="food")? "selected" :" "; ?>>Food and Processing</option>
                                           <option value="manufacture" <?php echo ($company['c_ind_cat']=="manufacture")? "selected" :" "; ?>>Manufacturing</option>
-                                          <option value="ent" <?php echo ($company['c_ind_cat']=="ent")? "selected" :" "; ?>>Entertainment</option>
-                                          <option value="tech" <?php echo ($company['c_ind_cat']=="tech")? "selected" :" "; ?>>Technology</option>
-                                          <option value="building" <?php echo ($company['c_ind_cat']=="building")? "selected" :" "; ?>>Building & Construction</option>
+                                          <option value="entertainment" <?php echo ($company['c_ind_cat']=="entertainment")? "selected" :" "; ?>>Entertainment</option>
+                                          <option value="technology" <?php echo ($company['c_ind_cat']=="technology")? "selected" :" "; ?>>Technology</option>
+                                          <option value="construction" <?php echo ($company['c_ind_cat']=="construction")? "selected" :" "; ?>>Building & Construction</option>
                                           <option value="tourism" <?php echo ($company['c_ind_cat']=="tourism")? "selected" :" "; ?>>Tourism</option>
-                                          <option value="hosp" <?php echo ($company['c_ind_cat']=="hosp")? "selected" :" "; ?>>Hospitality</option>
+                                          <option value="hospitality" <?php echo ($company['c_ind_cat']=="hospitality")? "selected" :" "; ?>>Hospitality</option>
                                           <option value="law" <?php echo ($company['c_ind_cat']=="law")? "selected" :" "; ?>>Law</option>
                                           <option value="agriculture" <?php echo ($company['c_ind_cat']=="agriculture")? "selected" :" "; ?>>Agriculture</option>
                                         </select>
@@ -168,7 +193,17 @@
                                         <div class="form-group">
                                         <label for="city" class="col-sm-3 control-label">City / Town</label>
                                         <div class="col-sm-6">
-                                        <input type="text" class="form-control" value="<?php echo ucfirst(strtolower($company['c_city'])); ?>" name="city" id="city" placeholder="City / Town" required>
+                                        
+                                         <select class="form-control" name="city" cols="30" required>
+                                            <option value=""></option>
+                                            <option value="nairobi" <?php echo ($company['c_city']=="nairobi")? "selected" :" "; ?>>Nairobi</option>
+                                            <option value="kisumu" <?php echo ($company['c_city']=="kisumu")? "selected" :" "; ?>>Kisumu</option>
+                                            <option value="mombasa" <?php echo ($company['c_city']=="mombasa")? "selected" :" "; ?>>Mombasa</option>
+                                            <option value="eldoret" <?php echo ($company['c_city']=="eldoret")? "selected" :" "; ?>>Eldoret</option>
+                                            <option value="nyeri" <?php echo ($company['c_city']=="nyeri")? "selected" :" "; ?>>Nyeri</option>
+                                            <option value="embu" <?php echo ($company['c_city']=="embu")? "selected" :" "; ?>>Embu</option>
+                                            <option value="machakos" <?php echo ($company['c_city']=="machakos")? "selected" :" "; ?>>Machakos</option>
+                                         </select>
                                         </div>
                                         </div>
                                         <div class="form-group">

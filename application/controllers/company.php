@@ -228,6 +228,47 @@ class Company extends CI_Controller
 		$id=$this->input->post('id');
 		$this->company_m->delete_photo($id);
 	}
+	function add_logo()
+	{
+		 //file name
+        $file_element_name="upload-logo";
+		//image file config
+        $config['upload_path'] = './assets/images/logos/';
+		$config['allowed_types'] = 'gif|jpeg|png|jpg';
+		$config['max_size']	= '100';
+		$config['max_width'] = '1024';
+		$config['max_height'] = '768';
+        $this->upload->initialize($config);
+
+		if(!$this->upload->do_upload($file_element_name))
+		{
+           $data['errors']=$this->upload->display_errors();
+           echo json_encode($data);
+		}
+		else
+		{
+			$data=$this->upload->data();
+			$id=$this->input->post('company-id');
+			if($this->company_m->add_logo($data['file_name'],$id))
+			{
+				//echo $data['file_name'];
+				$data['success']="Image Added!";
+				echo json_encode($data);
+			}
+			else
+			{
+				unlink($data['full_path']);
+				$data['errors']="Something went wrong.Please try again";
+				echo json_encode($data);
+			}
+			
+		}
+	}
+	function delete_logo()
+	{
+		$id=$this->input->post('id');
+		$this->company_m->delete_logo($id);
+	}
 	function logout()
 	{
 		//log the user out

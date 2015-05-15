@@ -201,6 +201,37 @@ class Company_m extends CI_Model
       	return false;
       }
 	}
+	function add_logo($filename,$id)
+    {
+	  $data=array('c_logo'=>$filename);
+	  $this->db->where('id',$id);
+      $query=$this->db->update('company_information',$data);
+
+      if($this->db->affected_rows($query)==1)
+      {
+        
+          return true;
+      }
+      else
+      {
+      	return false;
+      }
+	}
+	function delete_logo($id)
+	{   
+		$data=array('c_logo'=>NULL);
+		$this->db->where('id',$id);
+		$result=$this->db->update('company_information',$data);
+		if($this->db->affected_rows($result)==1)
+	      {
+	          //return true;
+	          echo "success";
+	      }
+	      else
+	      {
+	        return false;
+	      }
+	}
 	function add_service()
 	{
 		$data=array('service_name' =>$this->input->post('s_val'),'company_id'=>$this->input->post('id') );
@@ -340,7 +371,7 @@ class Company_m extends CI_Model
         return false;
       }	
 	}
-	function search($terms, $start = 0, $results_per_page = 0)
+	function search($terms,$cats,$citys, $start = 0, $results_per_page = 0)
     {
         // Determine whether we need to limit the results
         if ($results_per_page > 0)
@@ -353,22 +384,49 @@ class Company_m extends CI_Model
         }
  
         // Execute our SQL statement and return the result
+        
         $sql = "SELECT *
                     FROM company_information
-                    WHERE MATCH (c_name) AGAINST (?) > 0
+                    WHERE MATCH (c_name) AGAINST (?)
+                    OR MATCH (c_prof) AGAINST (?)
+                    OR MATCH (c_ind_cat) AGAINST (?) 
+                    OR MATCH (c_city) AGAINST (?) > 0
                     $limit";
-        $query = $this->db->query($sql, array($terms, $terms));
+        $query = $this->db->query($sql, array($terms, $terms,$cats,$citys));
+        
+        /*
+        $this->db->select('*');
+        $this->db->from('company_information');
+        $this->db->where('MATCH (c_name) AGAINST ("'.$terms.'")');
+        $this->db->or_where('MATCH (c_prof) AGAINST ("'.$terms.'") > 0');
+        $this->db->limit($limit);
+        $query=$this->db->get();
+        */         
         return $query->result();
     }
  
-    function count_search_results($terms)
+    function count_search_results($terms,$cats,$citys)
     {
         // Run SQL to count the total number of search results
+        
         $sql = "SELECT COUNT(*) AS count
                     FROM company_information
-                    WHERE MATCH (c_name) AGAINST (?)";
-        $query = $this->db->query($sql, array($terms));
+                    WHERE MATCH (c_name) AGAINST (?) 
+                    OR MATCH (c_prof) AGAINST (?)
+                    OR MATCH (c_ind_cat) AGAINST (?)
+                    OR MATCH (c_city) AGAINST (?)";
+        $query = $this->db->query($sql, array($terms, $terms,$cats,$citys));
         return $query->row()->count;
+        
+        /*
+        $this->db->select('*');
+        $this->db->from('company_information');
+        $this->db->where('MATCH (c_name) AGAINST ("'.$terms.'")');
+        $this->db->or_where('MATCH (c_prof) AGAINST ("'.$terms.'") > 0');
+        $this->db->limit($limit);
+        $query=$this->db->count_all_results();         
+        return $query;
+        */
     }
 
 }
