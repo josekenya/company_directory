@@ -19,10 +19,28 @@
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url();?>assets/css/sb-admin-2.css" rel="stylesheet">
-
+     <!-- Custom CSS -->
+    <link href="<?php echo base_url();?>assets/css/dropzone.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <style>
+
+    body{ margin-top:50px;}
+    .nav-tabs .glyphicon:not(.no-margin) { margin-right:10px; }
+    .tab-pane .list-group-item:first-child {border-top-right-radius: 0px;border-top-left-radius: 0px;}
+    .tab-pane .list-group-item:last-child {border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;}
+    .tab-pane .list-group .checkbox { display: inline-block;margin: 0px; }
+    .tab-pane .list-group input[type="checkbox"]{ margin-top: 2px; }
+    .tab-pane .list-group .glyphicon { margin-right:5px; }
+    .tab-pane .list-group .glyphicon:hover { color:#FFBC00; }
+    a.list-group-item.read { color: #222;background-color: #F3F3F3; }
+    hr { margin-top: 5px;margin-bottom: 10px; }
+    .nav-pills>li>a {padding: 5px 10px;}
+
+    .ad { padding: 5px;background: #F5F5F5;color: #222;font-size: 80%;border: 1px solid #E5E5E5; }
+    .ad a.title {color: #15C;text-decoration: none;font-weight: bold;font-size: 110%;}
+    .ad a.url {color: #093;text-decoration: none;}
+
     .p-center
     {
         text-align: center;
@@ -144,21 +162,18 @@
     <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
     <!-- Validation JavaScript -->
     <script src="<?php echo base_url();?>assets/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="<?php echo base_url();?>assets/js/storageapi.js"></script>
     <script src="<?php echo base_url();?>assets/js/jquery.form.min.js"></script>
     <script src="<?php echo base_url();?>assets/ckeditor/ckeditor.js"></script>
     <script src="<?php echo base_url();?>assets/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/moment.js"></script> 
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/livestamp.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo base_url();?>assets/js/metisMenu.min.js"></script>
-
-     <!-- DataTables JavaScript -->
-    <script src="<?php echo base_url();?>assets/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url();?>assets/js/dataTables.bootstrap.min.js">
-    </script>
-   
+    <!-- Dropzone -->
+    <script src="<?php echo base_url();?>assets/js/dropzone.min.js"></script>
     <!-- Custom Theme JavaScript -->
      <script src="<?php echo base_url();?>assets/js/index.js"></script>
     <script src="<?php echo base_url();?>assets/js/sb-admin-2.js"></script>

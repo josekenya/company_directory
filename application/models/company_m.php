@@ -46,7 +46,7 @@ class Company_m extends CI_Model
 	
 	function update_unread($id)
 	{
-      $data=array('read'=>1,'unread'=>0);
+      $data=array('mread'=>1,'unread'=>0);
       $this->db->where('message_id',$id);
       $query=$this->db->update('messages',$data);
       if($this->db->affected_rows($query)==1)
@@ -237,6 +237,7 @@ class Company_m extends CI_Model
 		$data=array('service_name' =>$this->input->post('s_val'),'company_id'=>$this->input->post('id') );
 		$query=$this->db->insert('services',$data);
 	}
+	
 	function add_gallery($filename)
 	{
 		$data=array(

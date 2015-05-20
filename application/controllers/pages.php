@@ -32,6 +32,11 @@ class Pages extends CI_Controller
 
 		    $this->template->load('home', 'pages/search_home_v', $data);
 		}
+		else
+		{
+			redirect('me','refresh');
+
+		}
 	}
 	
 	function search($search_terms = '',$categories= '',$cities= '', $start = 0)
@@ -95,6 +100,10 @@ class Pages extends CI_Controller
         $this->template->load('home', 'pages/search_results_v', $data);
 
         
+		}
+		else
+		{
+			redirect('me','refresh');
 		}
 		//$data=array('page_title'=>'Search here');
 		//$this->template->load('home', 'pages/search_home_v', $data);

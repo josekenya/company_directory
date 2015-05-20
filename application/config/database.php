@@ -44,6 +44,28 @@
 | The $active_record variables lets you determine whether or not to load
 | the active record class
 */
+/*
+$active_group = 'default';
+$active_record = TRUE;
+/* production*/
+/*
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'arcturus_demo';
+$db['default']['password'] = 'b4db0y14';
+$db['default']['database'] = 'arcturus_co_directory_db';
+$db['default']['dbdriver'] = 'mysql';
+$db['default']['dbprefix'] = '';
+$db['default']['pconnect'] = TRUE;
+$db['default']['db_debug'] = TRUE;
+$db['default']['cache_on'] = FALSE;
+$db['default']['cachedir'] = '';
+$db['default']['char_set'] = 'utf8';
+$db['default']['dbcollat'] = 'utf8_general_ci';
+$db['default']['swap_pre'] = '';
+$db['default']['autoinit'] = TRUE;
+$db['default']['stricton'] = FALSE;
+*/
+/*development */
 
 $active_group = 'default';
 $active_record = TRUE;

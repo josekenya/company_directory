@@ -4,6 +4,7 @@ class Company extends CI_Controller
 	function _construct()
 	{
 		parent::_construct();
+		$id=$this->uri->segment(2);
 	}
 
 	function index()
@@ -16,29 +17,35 @@ class Company extends CI_Controller
 		else
 		{
 			$id=$this->uri->segment(2);
-			$data['photos']=$this->company_m->get_photos($id);
+			
 			$data['services']=$this->company_m->get_services($id);
 			$data['company']=$this->company_m->get_co_details($id);
 			$data['page_title']='Company Profile';
 		    $this->template->load('company_default','pages/company_profile_v', $data);
 		}
 	}
-	function get_new_msg()
+	function slider_images()
 	{
-		$id=$this->input->post('m_id');
+	  $id=$_GET['id'];
+	  $data['photos']=$this->company_m->get_photos($id);
+	  echo json_encode($data);
+
+	}
+	function get_count()
+	{
+		$id=$_GET['id'];
 		$data['new_msg']=$this->company_m->get_msg_count($id);
 		echo json_encode($data);
 	}
 	function get_messages()
 	{ 
-		$id=$this->input->post('c_id');
+		$id=$_GET['c_id'];
 		$data['messages']=$this->company_m->get_msg_list($id);
 		echo json_encode($data);
 	}
 	function get_msg_details()
 	{  
-        //if($this->company_m->update_unread($id))
-        $id=$this->input->post('t_id');
+        $id=$_GET['t_id'];
         $data['co_msg']=$this->company_m->get_co_msg($id);
         echo json_encode($data);  
 	}
@@ -191,9 +198,9 @@ class Company extends CI_Controller
 	function add_photo()
 	{
 		 //file name
-        $file_element_name="upload-file";
+        $file_element_name="upload-gallery";
 		//image file config
-        $config['upload_path'] = './assets/images/';
+        $config['upload_path'] = './assets/images/sliders/';
 		$config['allowed_types'] = 'gif|jpeg|png|jpg';
 		$config['max_size']	= '100';
 		$config['max_width'] = '1024';

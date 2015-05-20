@@ -1,50 +1,59 @@
+//add logo
+Dropzone.options.uploadLogo={
+ paramName:"upload-logo",
+ method:"post",
+ addRemoveLinks:true,
+ clickable:true,
+ maxFiles:"1",
+ dictDefaultMessage:"Click to upload New Logo",
+ dictRemoveFile:"Remove Logo",
+ init: function() {
+    this.on("success", function(file, responseText) {
+      var response=JSON.parse(responseText);
+      //file.previewTemplate.appendChild(document.createTextNode(response.success));
+      document.getElementById('logo').src="/company_directory/assets/images/logos/" + response.client_name;
+      //console.log(responseText);
+    });
+    this.on("maxfilesexceeded", function(file) { this.removeFile(file); });
+}
+};
+//add gallery
+Dropzone.options.uploadGallery = {
+	paramName:"upload-gallery",
+	maxFiles:"2",
+    init: function() {
+        thisDropzone = this;
+        var iid=$("#company-id").val();
+        console.log(iid);
+        $.getJSON('/company_directory/company/slider_images',{id:iid}, function(data) {
+        	console.log(data);
+            $.each(data.photos, function(key,value){
+                var mockFile = {name: value.photo_url};
+                thisDropzone.options.addedfile.call(thisDropzone, mockFile);
+                thisDropzone.options.thumbnail.call(thisDropzone, mockFile, "/company_directory/assets/images/logos/"+value.photo_url);
+                var removeButton = Dropzone.createElement('<span style="cursor:pointer" data-id="'+ value.id +'" id="delete-logo" class="label  label-danger">Remove</span>');
+                $(".dz-progress").remove();
+                $(".dz-size").remove();
+                var _this = this;
+		        removeButton.addEventListener("click", function(e) 
+		            {
+		                e.preventDefault();
+		                e.stopPropagation();
+		                var id=$(this).attr('data-id');
+		                $.post("/company_directory/company/delete_photo",{id:id});
+		                thisDropzone.removeFile(mockFile);
+		            });
+                
+                mockFile.previewElement.appendChild(removeButton); 
+            });    
+        });
+
+        thisDropzone.on("maxfilesexceeded", function(file) { thisDropzone.removeFile(file); });   
+    }
+};
+
 $(function(){
 /* company profile editing */
-/* upload logo */
-$("#add-logo-form").ajaxForm({
-	
-	beforeSubmit:function(formData,jqForm,options)
-	{
-		var queryString = $.param(formData);
-		$("#loader").removeClass('hide');
-		$("#logo").addClass('hide');
-		//return true;
-	},
-	success:function(responseText,statusText,xhr)
-	{
-	var response=JSON.parse(responseText);
-		if(response.success)
-		{
-			$("#loader").addClass('hide');
-			location.reload();
-			$("#logo").removeClass('hide');
-			$(this).clearForm();
-		
-		}
-		else
-		{
-			$("#loader").addClass('hide');
-			$("#load-error").html(response.errors).removeClass('hide').delay(2000).addClass('hide');
-		}
-	},
-	error:function(jqXHR,textStatus)
-	{
-	$("#loader").addClass('hide');
-	$(".load-error").html(textStatus).removeClass('hide').delay(2000).addClass('hide');
-	}
-
-});
-/*delete photo */
-$('.logo-img-container').on("click","#delete-logo", function(e){
-     //user click on remove text
-      $(this).parent('div').remove();
-      var id=$(this).attr('data-id');
-      $.ajax({type:"POST",url:"/company_directory/company/delete_logo",data:{id:id},success:function(result){
-        location.reload();
-      }});
-      e.preventDefault();   
-    });
-
 /* basic info edit */
 $('#basic_info_btn').click(function(e){
 	$('#basic_info_form').validate({
@@ -288,96 +297,40 @@ $('#publish_btn').click(function(e){
 		}
 	});
 });
-/* upload image */
-
-$("#add-photo-form").ajaxForm({
-	
-	beforeSubmit:function(formData,jqForm,options)
-	{
-		var queryString = $.param(formData);
-		$(".show-progress").removeClass('hide');
-		//return true;
-	},
-	success:function(responseText,statusText,xhr)
-	{
-	var response=JSON.parse(responseText);
-	//var img=responseText;
-		if(response.success)
-		{
-			//var ct= xhr.getResponseHeader("content-type");
-			$(".empty_photos").addClass('hide');
-			$(".show-u-progress").removeClass('hide').fadeOut();
-			$(".show-u-success").html(response.success).removeClass('hide').delay(2000).fadeOut();
-			$("#container").append('<div class="img-container"><img src="http://localhost/company_directory/assets/images/'+ response.orig_name +'"  class="img-thumbnail" ><br/><span style="cursor:pointer" data-id="<?php echo $photo[&quot;id&quot;]; ?>" id="delete-photo" class="label label-danger">x</span></div>');
-			//console.log(response.orig_name);
-			$(this).clearForm();
-		
-		}
-		else
-		{
-			$(".show-u-progress").removeClass('hide').fadeOut();
-			$(".show-u-error").html(response.errors).removeClass('hide').delay(2000).fadeOut();
-		}
-	},
-	error:function(jqXHR,textStatus)
-	{
-	$(".show-u-error").html(textStatus).removeClass('hide').delay(2000).fadeOut();
-	}
-
-});
 
 
-/*delete photo */
-$('.img-container').on("click","#delete-photo", function(e){
-     //user click on remove text
-      $(this).parent('div').remove();
-      var id=$(this).attr('data-id');
-      $.ajax({type:"POST",url:"/company_directory/company/delete_photo",data:{id:id},success:function(result){
-        $('.show-u-success').html(result);
-      }});
-      e.preventDefault();   
-    });
 /*get msg count */
 var cid=$("#msg").val();
 console.log(cid);
   setTimeout(function(){
-	$.ajax({url:'/company_directory/company/get_new_msg',
-		type:'POST',
-		data:{m_id:cid},
-		dataType:'json',
-		success:function(data){
-       //console.log(data.new_msg);
-        $('.badge').html(data.new_msg);
-	}});
+	$.getJSON('/company_directory/company/get_count',{id:cid},function(data){
+        $('.count').html(data.new_msg);
+	});
 },500);
 /* list msg*/
-   $.ajax({url:'/company_directory/company/get_messages',
-		   	type:'POST',
-		   	data:{c_id:cid},
-		   	dataType:'json',
-		   	success:function(data){
-		    //var response=JSON.parse(data);
+   $.getJSON('/company_directory/company/get_messages',
+		      {c_id:cid},function(data){
+		    /*var response=JSON.parse(data);*/
 		    //console.log(data.messages);
 	        $.each(data.messages,function(idx,val){
-	          (val.read==null)?$("#msg-container").append('<tr data-msg="'+ val.message_id +'"class="hit unread"><td>New message from  '+ val.sender +' </td></tr>'):$("#msg-container").append('<tr data-msg="'+ val.message_id +'"class="hit none"><td>New message from  '+ val.sender +' </td></tr>');
-	        });   
-	}});
+	          (val.read==null)?$(".list-group")
+	          .append('<a href="#" id="hit" data-msg="'+val.message_id+'" class="list-group-item"><div class="checkbox"><label><input type="checkbox"></label></div><span class="name" style="min-width: 120px;display: inline-block;">'+ val.sender +'</span> <span class="">New message</span><span class="badge" data-livestamp="'+val.duration+'"></span><span class="pull-right"></span></a>')
+	          :$(".list-group")
+	          .append('<a href="#" id="hit" data-msg="'+
+	          	val.message_id+'" class="list-group-item read"><div class="checkbox"><label><input type="checkbox"></label></div><span class="name" style="min-width: 120px;display: inline-block;">'+ val.sender +'</span> <span class="">New message</span><span class="badge" data-livestamp="'+val.duration+'"></span><span class="pull-right"></span></a>');
+	        });});
    /* view msg */
-   $("body").on('click','.hit',function(){
-
-   	   $(this).removeClass('unread');
+   $("body").on('click','#hit',function(){
+   	   /*$(this).removeClass('unread');*/
    	   var msg_id=$(this).attr('data-msg');
    	   console.log(msg_id);
-   	   $.ajax({url:'/company_directory/company/get_msg_details',
-		   	type:'POST',
-		   	data:{t_id:msg_id},
-		   	dataType:'json',
-		   	success:function(data){
+   	   $.getJSON('/company_directory/company/get_msg_details',
+		   	{t_id:msg_id},function(data){
 		    var response=data.co_msg; 
 		    console.log(response);
 		    $(".sender").html(response.sender);
 		    $(".message").html(response.message);     
-	    }});
+	    });
       $("#myMessage").modal('show');
    });
   

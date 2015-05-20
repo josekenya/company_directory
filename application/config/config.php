@@ -14,6 +14,8 @@
 | path to your installation.
 |
 */
+//$config['base_url']	= 'http://demo.arcturus.co.ke/company_directory/';
+ /*development */
 $config['base_url']	= 'http://localhost/company_directory/';
 
 /*

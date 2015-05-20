@@ -50,8 +50,9 @@ $('#login_btn').click(function(e){
 			var response=JSON.parse(result);
 			  if(response.success==1)
 				{
-				   location.reload();
-			       location.href="me/";
+				   //location.reload();
+			       //location.href="me/";
+			       window.location.replace("me/");
 				}
 				else
 				{

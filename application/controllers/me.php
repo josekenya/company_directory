@@ -12,7 +12,7 @@ class Me extends CI_Controller
 		if (!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
-			redirect('pages/search', 'refresh');
+			redirect('/', 'refresh');
 		}
 		else
 		{
@@ -57,7 +57,7 @@ class Me extends CI_Controller
 		if (!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
-			redirect('pages/search', 'refresh');
+			redirect('/', 'refresh');
 		}
 		else
 		{
